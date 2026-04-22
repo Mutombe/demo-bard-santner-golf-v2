@@ -9,15 +9,25 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-ivory-200/15">
           <div className="md:col-span-5">
             <div className="flex items-center gap-5 mb-6">
-              <div className="bg-ivory-50 p-2.5">
-                <img src={partnership.sponsor.mark} alt="Bard Santner Inc" className="h-7 w-auto" />
-              </div>
+              {/* Orange BS mark — designed for dark backgrounds */}
+              <img
+                src="/icon.png"
+                alt="Bard Santner Inc"
+                className="h-10 w-auto"
+                loading="lazy"
+                decoding="async"
+              />
               <span className="font-display italic text-xs text-ivory-300 tracking-wider">
                 in partnership with
               </span>
-              <div className="bg-ivory-50 p-2">
-                <img src={partnership.host.mark} alt="Royal Harare Golf Club" className="h-10 w-auto" />
-              </div>
+              {/* Royal Harare crest — invert to ivory on dark */}
+              <img
+                src={partnership.host.mark}
+                alt="Royal Harare Golf Club"
+                className="h-11 w-auto brightness-0 invert opacity-90"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <p className="font-serif text-lg text-ivory-200 leading-relaxed max-w-md">
               {footer.tagline}

@@ -57,9 +57,9 @@ export default function TheEvent() {
       </section>
 
       {/* Essay body — editorial columns */}
-      <article className="max-w-4xl mx-auto px-5 sm:px-8 pb-20 lg:pb-28">
+      <article className="max-w-4xl mx-auto px-5 sm:px-8 pb-20 lg:pb-28 prose">
         <SectionReveal>
-          <p className="drop-cap font-serif text-[1.2rem] leading-[1.85] text-ink-700 text-pretty">
+          <p className="drop-cap drop-cap-glow font-serif text-[1.2rem] leading-[1.85] text-ink-700 text-pretty">
             {eventEssay.leadParagraph}
           </p>
           {eventEssay.paragraphs.map((p, i) => (
@@ -68,13 +68,13 @@ export default function TheEvent() {
             </p>
           ))}
 
-          <span className="asterism" aria-hidden />
+          <span className="asterism asterism-breathe" aria-hidden />
 
-          <p className="pull-quote text-center">
+          <p className="pull-quote text-center italic-tremble-in">
             {eventEssay.closingLine}
           </p>
 
-          <hr className="brass-rule mt-16" />
+          <hr className="brass-rule brass-rule-breathe mt-16" />
         </SectionReveal>
       </article>
 

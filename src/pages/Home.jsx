@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowRight, Quotes } from '@phosphor-icons/react';
 
 import PageTransition from '../components/PageTransition';
@@ -8,9 +7,10 @@ import SectionReveal from '../components/SectionReveal';
 import Countdown from '../components/Countdown';
 import RomanNumeralHeading from '../components/RomanNumeralHeading';
 import EventCard from '../components/EventCard';
+import HeroScrollingColumns from '../components/HeroScrollingColumns';
 
 import {
-  hero, masthead, partnership, brand, eventEssay, calendar,
+  masthead, eventEssay, calendar,
   courseEssay, qualifying, media,
 } from '../data/siteData';
 
@@ -22,100 +22,8 @@ export default function Home() {
         description="Eleven qualifying rounds, one road to Sun City. A loyalty series from Bard Santner Inc played at Royal Harare Golf Club, est. 1898."
       />
 
-      {/* ---------- HERO ---------- */}
-      <section className="relative min-h-[calc(100svh-5rem)] flex flex-col">
-        {/* Partnership line at top */}
-        <div className="relative z-20 pt-10 sm:pt-12">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8">
-            <div className="flex items-center gap-4 sm:gap-6 text-ink-500">
-              <span className="eyebrow">{hero.eyebrow}</span>
-              <span className="h-px flex-1 bg-brass-500/40 max-w-[180px]" />
-              <span className="font-display italic text-sm text-ink-500">An invitation</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-0 relative">
-          {/* Left: editorial lede */}
-          <div className="lg:col-span-6 px-5 sm:px-8 lg:pl-16 xl:pl-24 pt-10 lg:pt-20 pb-16 lg:pr-10 flex flex-col justify-center relative z-10">
-            <motion.h1
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[1.02] text-royal-900 text-balance"
-            >
-              {hero.titleBefore}{' '}
-              <em className="font-display italic text-brass-600">{hero.titleItalic}</em>{' '}
-              {hero.titleAfter}
-            </motion.h1>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.35, duration: 1 }}
-              className="mt-9 max-w-xl"
-            >
-              <hr className="brass-rule-solid w-16 mb-6" />
-              <p className="font-serif text-[clamp(1.05rem,1.3vw,1.25rem)] text-ink-500 leading-relaxed text-pretty">
-                {hero.subtitle}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.9 }}
-              className="mt-10 flex flex-col sm:flex-row items-start gap-4"
-            >
-              <Link
-                to={hero.primaryCta.to}
-                className="group inline-flex items-center gap-3 px-7 py-4 bg-royal-900 text-ivory-50 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-brass-500 transition-colors"
-              >
-                {hero.primaryCta.label}
-                <ArrowRight size={16} weight="regular" className="transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to={hero.secondaryCta.to}
-                className="classic-link font-serif italic text-lg"
-              >
-                {hero.secondaryCta.label}
-              </Link>
-            </motion.div>
-
-            {/* Partnership mark inline */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 1 }}
-              className="mt-14 flex items-center gap-5"
-            >
-              <img src={partnership.sponsor.mark} alt="Bard Santner Inc" className="h-7 w-auto" loading="eager" decoding="async" />
-              <span className="font-display italic text-xs text-ink-400 tracking-wider">{partnership.preamble}</span>
-              <img src={partnership.host.mark} alt="Royal Harare Golf Club" className="h-10 w-auto" loading="eager" decoding="async" />
-            </motion.div>
-          </div>
-
-          {/* Right: framed photograph */}
-          <div className="lg:col-span-6 relative bg-ivory-100">
-            <div className="lg:absolute inset-0 lg:py-12 lg:pr-12 xl:pr-20 lg:pl-6">
-              <div className="plate h-full min-h-[480px] lg:min-h-0">
-                <img
-                  src={hero.heroImage}
-                  alt={hero.heroCaption}
-                  loading="eager"
-                  fetchpriority="high"
-                  decoding="async"
-                  className="h-full w-full object-cover object-center"
-                  onError={(e) => (e.currentTarget.style.opacity = '0.2')}
-                />
-              </div>
-              <p className="mt-3 px-2 font-serif italic text-ink-400 text-sm hidden lg:block">
-                <span className="engraved-numeral mr-2">IX</span>— {hero.heroCaption}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ---------- HERO: Scrolling columns, vintage-golf ---------- */}
+      <HeroScrollingColumns />
 
       {/* ---------- MASTHEAD QUOTE ---------- */}
       <section className="bg-royal-950 text-ivory-100 py-24 relative overflow-hidden paper-grain">
@@ -224,7 +132,7 @@ export default function Home() {
             <div className="lg:col-span-7 grid grid-cols-2 gap-5 sm:gap-6">
               {courseEssay.signatureHoles.map((h, i) => (
                 <SectionReveal key={h.number} delay={0.1 * i}>
-                  <figure>
+                  <Link to="/the-course" className="group block photo-pop">
                     <div className="plate sepia-hover aspect-square">
                       <img
                         src={h.image}
@@ -234,11 +142,11 @@ export default function Home() {
                         onError={(e) => (e.currentTarget.style.opacity = '0.2')}
                       />
                     </div>
-                    <figcaption className="mt-3 px-1">
-                      <span className="engraved-numeral mr-2">{h.roman}</span>
-                      <span className="font-display italic text-royal-900">{h.name}</span>
+                    <figcaption className="mt-3 px-1 flex items-baseline gap-2">
+                      <span className="engraved-numeral">{h.roman}</span>
+                      <span className="font-display italic text-royal-900 underline-sweep">{h.name}</span>
                     </figcaption>
-                  </figure>
+                  </Link>
                 </SectionReveal>
               ))}
             </div>
@@ -294,16 +202,27 @@ export default function Home() {
             />
           </SectionReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 mt-16">
             {qualifying.items.map((item, i) => (
               <SectionReveal key={item.roman} delay={0.05 * i}>
-                <article className="flex items-start gap-5">
-                  <span className="engraved-numeral text-3xl shrink-0 pt-0.5 w-10">{item.roman}</span>
+                <Link
+                  to="/the-event"
+                  className="group flex items-start gap-5 p-5 -m-5 transition-colors hover:bg-ivory-50 border-b border-ivory-200"
+                >
+                  <span className="engraved-numeral text-3xl shrink-0 pt-0.5 w-10 transition-colors group-hover:text-brass-500">
+                    {item.roman}
+                  </span>
                   <div className="flex-1">
-                    <h3 className="font-display text-xl text-royal-900 mb-2">{item.title}</h3>
+                    <h3 className="font-display text-xl text-royal-900 mb-2 underline-sweep inline-block">
+                      {item.title}
+                    </h3>
                     <p className="font-serif text-ink-500 leading-relaxed text-pretty">{item.body}</p>
+                    <span className="inline-flex items-center gap-2 eyebrow mt-3 text-ink-400 group-hover:text-brass-600 transition-colors">
+                      Read more
+                      <ArrowRight size={12} className="arrow-reveal" />
+                    </span>
                   </div>
-                </article>
+                </Link>
               </SectionReveal>
             ))}
           </div>
@@ -312,14 +231,20 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
             {qualifying.downstream.map((d, i) => (
               <SectionReveal key={d.title} delay={0.1 * i}>
-                <article className="group">
+                <Link to="/the-event" className="group block photo-pop">
                   <div className="plate sepia-hover aspect-[4/3]">
                     <img src={d.image} alt={d.title} loading="lazy" decoding="async" />
                   </div>
                   <p className="eyebrow mt-5">{d.eyebrow}</p>
-                  <h3 className="font-display text-2xl text-royal-900 mt-2">{d.title}</h3>
+                  <h3 className="font-display text-2xl text-royal-900 mt-2 underline-sweep inline-block">
+                    {d.title}
+                  </h3>
                   <p className="font-serif text-ink-500 mt-3 leading-relaxed italic text-pretty">{d.body}</p>
-                </article>
+                  <span className="inline-flex items-center gap-2 eyebrow mt-4 text-ink-400 group-hover:text-brass-600 transition-colors">
+                    Read the prize details
+                    <ArrowRight size={12} className="arrow-reveal" />
+                  </span>
+                </Link>
               </SectionReveal>
             ))}
           </div>
@@ -349,14 +274,14 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-14">
             {media.items.slice(0, 8).map((m, i) => (
               <SectionReveal key={m.id} delay={0.04 * i}>
-                <figure>
+                <Link to="/media" className="group block photo-pop">
                   <div className="plate sepia-hover aspect-[4/5]">
                     <img src={m.src} alt={m.caption} loading="lazy" decoding="async" />
                   </div>
-                  <figcaption className="mt-2 px-1 font-serif text-xs italic text-ink-400 leading-snug">
+                  <figcaption className="mt-2 px-1 font-serif text-xs italic text-ink-400 leading-snug group-hover:text-ink-600 transition-colors">
                     {m.caption}
                   </figcaption>
-                </figure>
+                </Link>
               </SectionReveal>
             ))}
           </div>

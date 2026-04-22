@@ -6,6 +6,7 @@ import SEO from '../components/SEO';
 import SectionReveal from '../components/SectionReveal';
 import RomanNumeralHeading from '../components/RomanNumeralHeading';
 import CourseHoleCard from '../components/CourseHoleCard';
+import CountUp from '../components/CountUp';
 import { courseEssay, masthead, partnership } from '../data/siteData';
 
 export default function TheCourse() {
@@ -31,9 +32,18 @@ export default function TheCourse() {
             <br />
             <em className="italic text-brass-600">Golf Club</em>
           </h1>
-          <hr className="brass-rule mx-auto w-28 mt-8" />
+          <hr className="brass-rule brass-rule-breathe mx-auto w-28 mt-8" />
           <p className="mt-8 engraved-numeral text-2xl tracking-[0.1em]">MDCCCXCVIII</p>
-          <p className="eyebrow-ink mt-2">Established {courseEssay.founded}</p>
+          <p className="eyebrow-ink mt-2">
+            Established{' '}
+            <CountUp
+              from={1800}
+              to={1898}
+              duration={1800}
+              className="engraved-numeral not-italic tracking-normal text-brass-600"
+              format={(n) => Math.round(n).toString()}
+            />
+          </p>
         </SectionReveal>
       </section>
 
@@ -57,9 +67,9 @@ export default function TheCourse() {
       </section>
 
       {/* Essay */}
-      <article className="max-w-4xl mx-auto px-5 sm:px-8 pb-20">
+      <article className="max-w-4xl mx-auto px-5 sm:px-8 pb-20 prose">
         <SectionReveal>
-          <p className="drop-cap font-serif text-[1.2rem] leading-[1.85] text-ink-700 text-pretty">
+          <p className="drop-cap drop-cap-glow font-serif text-[1.2rem] leading-[1.85] text-ink-700 text-pretty">
             {courseEssay.prose[0]}
           </p>
           {courseEssay.prose.slice(1).map((p, i) => (
@@ -68,7 +78,7 @@ export default function TheCourse() {
             </p>
           ))}
 
-          <span className="asterism" aria-hidden />
+          <span className="asterism asterism-breathe" aria-hidden />
         </SectionReveal>
       </article>
 
@@ -134,13 +144,23 @@ export default function TheCourse() {
       </section>
 
       {/* Closing CTA */}
-      <section className="bg-royal-950 text-ivory-100 py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="bg-royal-950 text-ivory-100 py-20 lg:py-28 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/images/panoramic-parkland.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center opacity-25"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-royal-950/70" />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <SectionReveal>
             <div className="flex items-center justify-center gap-5 mb-8">
-              <img src={partnership.sponsor.mark} alt="" className="h-7 w-auto bg-ivory-50 p-1" />
+              <img src="/icon.png" alt="Bard Santner Inc" className="h-9 w-auto" />
               <span className="font-display italic text-sm text-ivory-300">in partnership with</span>
-              <img src={partnership.host.mark} alt="" className="h-11 w-auto bg-ivory-50 p-1" />
+              <img src={partnership.host.mark} alt="Royal Harare Golf Club" className="h-11 w-auto brightness-0 invert opacity-90" />
             </div>
             <h2 className="font-display text-[clamp(1.8rem,4vw,3rem)] leading-tight text-ivory-50">
               Play the course <em className="italic text-brass-400">this season</em>.

@@ -555,12 +555,12 @@ export const media = {
 export const nav = {
   primary: [
     { to: "/",                      label: "Home" },
-    { to: "/the-event",             label: "The Event" },
-    { to: "/the-course",            label: "The Course" },
+    { to: "/the-event",             label: "Event" },
+    { to: "/the-course",            label: "Course" },
     { to: "/calendar",              label: "Calendar" },
     { to: "/register",              label: "Register" },
-    { to: "/tournament-conditions", label: "Conditions" },
-    { to: "/media",                 label: "Media" },
+    { to: "/tournament-conditions", label: "Rules" },
+    { to: "/media",                 label: "Gallery" },
     { to: "/contact",               label: "Contact" },
   ],
 };

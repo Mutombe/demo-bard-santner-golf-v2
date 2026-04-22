@@ -77,24 +77,26 @@ export default function TournamentConditions() {
         <hr className="brass-rule my-14" />
 
         {/* Sections */}
-        {conditions.sections.map((s, i) => (
-          <SectionReveal key={s.roman} delay={0.04 * i}>
-            <section className="mt-10 first:mt-0">
-              <div className="flex items-baseline gap-5 mb-4">
-                <span className="engraved-numeral text-3xl shrink-0">{s.roman}</span>
-                <h2 className="font-display italic text-[clamp(1.4rem,2.4vw,2rem)] text-royal-900 leading-tight">
-                  {s.title}
-                </h2>
-              </div>
-              <p className="font-serif text-[1.1rem] leading-[1.8] text-ink-600 text-pretty pl-0 sm:pl-14">
-                {s.body}
-              </p>
-              {i < conditions.sections.length - 1 && <hr className="brass-rule mt-12" />}
-            </section>
-          </SectionReveal>
-        ))}
+        <div className="prose">
+          {conditions.sections.map((s, i) => (
+            <SectionReveal key={s.roman} delay={0.04 * i}>
+              <section className="mt-10 first:mt-0">
+                <div className="flex items-baseline gap-5 mb-4">
+                  <span className="engraved-numeral text-3xl shrink-0">{s.roman}</span>
+                  <h2 className="font-display italic text-[clamp(1.4rem,2.4vw,2rem)] text-royal-900 leading-tight">
+                    {s.title}
+                  </h2>
+                </div>
+                <p className="font-serif text-[1.1rem] leading-[1.8] text-ink-600 text-pretty pl-0 sm:pl-14">
+                  {s.body}
+                </p>
+                {i < conditions.sections.length - 1 && <hr className="brass-rule brass-rule-breathe mt-12" />}
+              </section>
+            </SectionReveal>
+          ))}
+        </div>
 
-        <span className="asterism" aria-hidden />
+        <span className="asterism asterism-breathe" aria-hidden />
 
         <SectionReveal>
           <p className="font-display italic text-center text-ink-500 text-lg">

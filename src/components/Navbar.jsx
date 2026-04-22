@@ -21,22 +21,20 @@ export default function Navbar({ onOpenSearch }) {
     <>
       <header
         className={[
-          'fixed top-0 inset-x-0 z-40 transition-all duration-500',
-          scrolled
-            ? 'bg-paper-50/92 backdrop-blur-md border-b border-ivory-300'
-            : 'bg-paper-50/80 backdrop-blur-sm border-b border-transparent',
+          'fixed top-0 inset-x-0 z-40 transition-shadow duration-500 bg-paper-50 border-b',
+          scrolled ? 'border-ivory-300 shadow-[0_1px_0_rgba(11,37,64,0.04)]' : 'border-ivory-200',
         ].join(' ')}
       >
         {/* Thin partnership ribbon */}
-        <div className="border-b border-ivory-200/70">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 py-2 flex items-center justify-between text-[0.66rem] tracking-[0.25em] uppercase font-sans text-ink-400">
+        <div className="border-b border-ivory-200/70 bg-paper-50">
+          <div className="max-w-7xl mx-auto px-5 sm:px-10 py-2 flex items-center justify-between text-[0.66rem] tracking-[0.25em] uppercase font-sans text-ink-400">
             <span className="hidden sm:inline">Season MMXXV · A loyalty of eleven rounds</span>
             <span className="sm:hidden">Season MMXXV</span>
             <span className="hidden md:inline text-brass-600">golf@bardsantner.com · +263 861 2000 700</span>
           </div>
         </div>
 
-        <nav className="max-w-7xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between gap-6">
+        <nav className="max-w-7xl mx-auto px-5 sm:px-10 h-20 flex items-center justify-between gap-6 bg-paper-50">
           {/* Dual partnership mark */}
           <Link to="/" className="flex items-center gap-4 group shrink-0" aria-label="Home">
             <img
@@ -59,7 +57,7 @@ export default function Navbar({ onOpenSearch }) {
           </Link>
 
           {/* Desktop nav */}
-          <ul className="hidden lg:flex items-center gap-7 font-sans text-[0.78rem] tracking-[0.22em] uppercase">
+          <ul className="hidden lg:flex items-center gap-5 xl:gap-7 font-sans text-[0.72rem] xl:text-[0.76rem] tracking-[0.2em] uppercase whitespace-nowrap">
             {nav.primary.map((item) => (
               <li key={item.to}>
                 <NavLink
