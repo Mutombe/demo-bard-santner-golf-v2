@@ -237,34 +237,40 @@ export default function Contact() {
             <div className="absolute top-2 left-2 right-2 h-px bg-brass-500/40" aria-hidden />
             <div className="absolute bottom-2 left-2 right-2 h-px bg-brass-500/40" aria-hidden />
             <div className="relative aspect-[16/9] w-full bg-ivory-200 overflow-hidden">
-              {/* Static map (SVG placeholder of the district) */}
-              <svg viewBox="0 0 800 450" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-                <defs>
-                  <pattern id="mapGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#C77D3A" strokeWidth="0.3" opacity="0.35" />
-                  </pattern>
-                </defs>
-                <rect width="800" height="450" fill="#F7F2E7" />
-                <rect width="800" height="450" fill="url(#mapGrid)" />
-                {/* Streets */}
-                <path d="M 0 180 L 800 200" stroke="#0B2540" strokeWidth="1.2" opacity="0.45" />
-                <path d="M 0 280 L 800 270" stroke="#0B2540" strokeWidth="1.2" opacity="0.45" />
-                <path d="M 320 0 L 340 450" stroke="#0B2540" strokeWidth="1.4" opacity="0.55" />
-                <path d="M 520 0 L 510 450" stroke="#0B2540" strokeWidth="1.2" opacity="0.45" />
-                {/* Golf course shape (green oval) */}
-                <ellipse cx="420" cy="240" rx="200" ry="110" fill="#ADB7CE" opacity="0.35" />
-                <ellipse cx="420" cy="240" rx="180" ry="90" fill="#0B2540" opacity="0.1" />
-                <text x="420" y="245" textAnchor="middle" fontFamily="'Playfair Display', serif" fontStyle="italic" fontSize="16" fill="#0B2540" opacity="0.75">
-                  Royal Harare Golf Club
-                </text>
-                {/* 5th Street label */}
-                <text x="340" y="100" textAnchor="middle" fontFamily="'Inter', sans-serif" fontSize="9" fill="#5D5A54" letterSpacing="0.15em" opacity="0.85" transform="rotate(92, 340, 100)">
-                  5TH STREET EXTENSION
-                </text>
-              </svg>
+              {/* Real map with vintage parchment filter */}
+              <iframe
+                title="Royal Harare Golf Club"
+                src="https://www.google.com/maps?q=Royal+Harare+Golf+Club,+Harare,+Zimbabwe&hl=en&z=15&output=embed"
+                className="absolute inset-0 w-full h-full border-0"
+                style={{
+                  filter: 'sepia(0.45) hue-rotate(-8deg) saturate(0.85) brightness(0.96) contrast(1.08)',
+                }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              {/* Warm parchment veil over the map for vintage cohesion */}
+              <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none mix-blend-multiply"
+                style={{
+                  background:
+                    'radial-gradient(ellipse at center, rgba(247,242,231,0.12) 0%, rgba(199,125,58,0.18) 80%, rgba(11,37,64,0.22) 100%)',
+                }}
+              />
+              {/* Brass hairline cross-hatch overlay (very subtle, parchment texture) */}
+              <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none opacity-[0.06]"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(#C77D3A 1px, transparent 1px), linear-gradient(90deg, #C77D3A 1px, transparent 1px)',
+                  backgroundSize: '64px 64px',
+                }}
+              />
 
-              {/* YOU ARE HERE marker */}
-              <div className="absolute" style={{ top: '50%', left: '52%' }}>
+              {/* YOU ARE HERE marker — editorial flourish floating over the real map */}
+              <div className="absolute pointer-events-none" style={{ top: '50%', left: '52%' }}>
                 <motion.div
                   className="relative -translate-x-1/2 -translate-y-full"
                   animate={{ y: [0, -3, 0] }}
