@@ -185,10 +185,11 @@ export default function HeroScrollingColumns() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="flex items-center gap-4 sm:gap-6 text-ivory-200"
+          className="flex items-center gap-4 sm:gap-6 text-ivory-200 min-h-[1.5rem]"
         >
-          <span className="eyebrow text-brass-400">{hero.eyebrow}</span>
-          <span className="h-px w-16 sm:w-24 bg-brass-500/60" />
+          {/* Season 2025 — hidden on mobile per client request; padding preserved by min-h and the hairline + italic below */}
+          <span className="hidden sm:inline eyebrow text-brass-400">{hero.eyebrow}</span>
+          <span className="h-px w-12 sm:w-24 bg-brass-500/60" />
           <span className="font-display italic text-sm text-ivory-300">An invitation</span>
         </motion.div>
 
