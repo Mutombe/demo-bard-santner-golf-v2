@@ -8,10 +8,14 @@ import Countdown from '../components/Countdown';
 import RomanNumeralHeading from '../components/RomanNumeralHeading';
 import EventCard from '../components/EventCard';
 import HeroScrollingColumns from '../components/HeroScrollingColumns';
+import CountUp from '../components/CountUp';
+import Prose from '../components/Prose';
+import IlluminatedCapitalCard from '../components/IlluminatedCapitalCard';
+import FramedPlate from '../components/FramedPlate';
 
 import {
-  masthead, eventEssay, calendar,
-  courseEssay, qualifying, media,
+  masthead, eventEssay, calendar, courseEssay,
+  qualifying, media, partnership, proseHtml,
 } from '../data/siteData';
 
 export default function Home() {
@@ -22,22 +26,44 @@ export default function Home() {
         description="Eleven qualifying rounds, one road to Sun City. A loyalty series from Bard Santner Inc played at Royal Harare Golf Club, est. 1898."
       />
 
-      {/* ---------- HERO: Scrolling columns, vintage-golf ---------- */}
+      {/* ---------- HERO: Scrolling columns, natural photos under a royal-navy glass ---------- */}
       <HeroScrollingColumns />
 
-      {/* ---------- MASTHEAD QUOTE ---------- */}
-      <section className="bg-royal-950 text-ivory-100 py-24 relative overflow-hidden paper-grain">
-        <div className="max-w-4xl mx-auto px-6 text-center relative">
-          <Quotes size={42} weight="regular" className="mx-auto text-brass-500 mb-8 -scale-x-100" />
-          <p className="font-display italic text-[clamp(1.8rem,3.6vw,3rem)] leading-tight text-ivory-50 text-balance">
-            {masthead.quote}
-          </p>
-          <hr className="brass-rule my-10 mx-auto w-32" />
-          <p className="eyebrow text-ivory-300">{masthead.attribution}</p>
+      {/* ---------- ENGRAVED PARTNERSHIP STRIP ---------- */}
+      <section className="engraved-plate relative">
+        <div className="max-w-6xl mx-auto px-6 py-8 flex items-center justify-center gap-6 sm:gap-10 flex-wrap relative">
+          <img src={partnership.sponsor.mark} alt="Bard Santner Inc" className="h-9 w-auto" loading="eager" />
+          <span className="hidden sm:block h-10 w-px bg-brass-500/50" aria-hidden />
+          <span className="font-display italic text-ink-500 text-base sm:text-lg">
+            {partnership.preamble}
+          </span>
+          <span className="hidden sm:block h-10 w-px bg-brass-500/50" aria-hidden />
+          <img src={partnership.host.mark} alt="Royal Harare Golf Club" className="h-12 w-auto" loading="eager" />
+          <span className="glint" aria-hidden />
         </div>
       </section>
 
-      {/* ---------- ESSAY: THE PREMISE ---------- */}
+      {/* ---------- MASTHEAD QUOTE (Golf Digest) ---------- */}
+      <section className="bg-royal-950 text-ivory-100 py-24 relative overflow-hidden paper-grain">
+        <div className="max-w-4xl mx-auto px-6 text-center relative">
+          <Quotes size={42} weight="regular" className="mx-auto text-brass-500 mb-8 -scale-x-100" />
+          <p className="font-display italic text-[clamp(1.8rem,3.6vw,3rem)] leading-tight text-ivory-50 text-balance italic-tremble-in">
+            {masthead.quote}
+          </p>
+          <hr className="brass-rule my-10 mx-auto w-32" />
+          <div className="flex items-center justify-center gap-4">
+            <p className="eyebrow text-ivory-300">{masthead.attribution.split(',')[0]},</p>
+            <span className="inline-flex items-baseline gap-2 border border-brass-400 px-3 py-1 text-brass-400">
+              <span className="eyebrow text-brass-400 text-[0.58rem]">Est.</span>
+              <span className="engraved-numeral text-xl text-brass-300">
+                <CountUp from={1900} to={1979} duration={1800} format={(n) => Math.round(n).toString()} />
+              </span>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- ESSAY: THE PREMISE — with drop cap & inline brass links ---------- */}
       <section className="py-24 lg:py-32 bg-paper-50">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <SectionReveal>
@@ -53,18 +79,16 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mt-16">
             <div className="lg:col-span-7">
               <SectionReveal delay={0.1}>
-                <p className="drop-cap font-serif text-[1.15rem] sm:text-[1.2rem] leading-[1.8] text-ink-700 text-pretty">
-                  {eventEssay.leadParagraph}
-                </p>
-                {eventEssay.paragraphs.map((p, i) => (
-                  <p key={i} className="font-serif text-[1.1rem] leading-[1.8] text-ink-700 text-pretty mt-5">
-                    {p}
-                  </p>
-                ))}
-                <span className="asterism" aria-hidden />
-                <p className="pull-quote italic text-royal-900">
-                  {eventEssay.closingLine}
-                </p>
+                <Prose
+                  as="p"
+                  className="drop-cap drop-cap-glow font-serif text-[1.18rem] sm:text-[1.22rem] leading-[1.9] text-ink-700 text-pretty"
+                  html={proseHtml.homeLead}
+                />
+                <Prose as="p" className="font-serif text-[1.1rem] leading-[1.85] text-ink-700 text-pretty mt-5" html={proseHtml.homePara1} />
+                <Prose as="p" className="font-serif text-[1.1rem] leading-[1.85] text-ink-700 text-pretty mt-5" html={proseHtml.homePara2} />
+                <Prose as="p" className="font-serif text-[1.1rem] leading-[1.85] text-ink-700 text-pretty mt-5" html={proseHtml.homePara3} />
+                <span className="asterism asterism-breathe" aria-hidden />
+                <Prose as="p" className="pull-quote italic text-royal-900 italic-tremble-in" html={proseHtml.homeClosing} />
               </SectionReveal>
             </div>
 
@@ -79,9 +103,11 @@ export default function Home() {
                     onError={(e) => (e.currentTarget.style.opacity = '0.2')}
                   />
                 </div>
-                <p className="mt-4 px-2 font-serif italic text-ink-400 text-sm">
-                  Flags at the opening round. The Highveld sky is almost aggressively blue in February.
-                </p>
+                <Prose
+                  as="p"
+                  className="mt-4 px-2 font-serif italic text-ink-400 text-sm"
+                  html={proseHtml.homeFlagsCaption}
+                />
               </SectionReveal>
             </aside>
           </div>
@@ -111,14 +137,33 @@ export default function Home() {
                   subtitle={courseEssay.subtitle}
                 />
                 <dl className="mt-10 space-y-4">
-                  {courseEssay.amenities.slice(0, 4).map((a) => (
-                    <div key={a.label} className="flex items-baseline justify-between gap-6 border-b border-ivory-300 pb-3">
-                      <dt className="eyebrow-ink">{a.label}</dt>
-                      <dd className="font-display text-xl text-royal-900">
-                        {a.roman ? <span className="engraved-numeral">{a.roman}</span> : a.value}
-                      </dd>
-                    </div>
-                  ))}
+                  <div className="flex items-baseline justify-between gap-6 border-b border-ivory-300 pb-3">
+                    <dt className="eyebrow-ink">Founded</dt>
+                    <dd className="font-display text-xl text-royal-900">
+                      <span className="engraved-numeral">MDCCCXCVIII</span>{' '}
+                      <span className="text-ink-400 text-base ml-1 italic font-serif">
+                        (<CountUp from={1800} to={1898} duration={1600} format={(n) => Math.round(n).toString()} />)
+                      </span>
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-6 border-b border-ivory-300 pb-3">
+                    <dt className="eyebrow-ink">Royal Charter</dt>
+                    <dd className="font-display text-xl text-royal-900 engraved-numeral">
+                      <CountUp from={1900} to={1960} duration={1600} format={(n) => Math.round(n).toString()} />
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-6 border-b border-ivory-300 pb-3">
+                    <dt className="eyebrow-ink">Course Par</dt>
+                    <dd className="font-display text-xl text-royal-900 italic">
+                      <CountUp from={60} to={72} duration={1400} format={(n) => Math.round(n).toString()} />
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-6 border-b border-ivory-300 pb-3">
+                    <dt className="eyebrow-ink">Length, White Markers</dt>
+                    <dd className="font-display text-xl text-royal-900 italic">
+                      <CountUp from={5000} to={6888} duration={1800} format={(n) => Math.round(n).toLocaleString()} />m
+                    </dd>
+                  </div>
                 </dl>
                 <Link
                   to="/the-course"
@@ -176,9 +221,11 @@ export default function Home() {
           </div>
 
           <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="font-serif italic text-ink-500 max-w-xl">
-              {calendar.footnote}
-            </p>
+            <Prose
+              as="p"
+              className="font-serif italic text-ink-500 max-w-xl"
+              html={proseHtml.calendarFootnote}
+            />
             <Link
               to="/calendar"
               className="inline-flex items-center gap-3 px-7 py-3.5 border border-royal-900 text-royal-900 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-royal-900 hover:text-ivory-50 transition-colors"
@@ -189,7 +236,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- QUALIFYING CRITERIA ---------- */}
+      {/* ---------- QUALIFYING CRITERIA — four illuminated pillar cards ---------- */}
       <section className="py-24 lg:py-32 bg-paper-50">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <SectionReveal>
@@ -202,8 +249,23 @@ export default function Home() {
             />
           </SectionReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 mt-16">
-            {qualifying.items.map((item, i) => (
+          {/* Four illuminated pillar cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 mt-16">
+            {qualifying.items.slice(0, 4).map((item) => (
+              <SectionReveal key={item.roman}>
+                <IlluminatedCapitalCard
+                  letter={item.roman}
+                  eyebrow={`Criterion ${item.roman}`}
+                  title={item.title}
+                  body={item.body}
+                />
+              </SectionReveal>
+            ))}
+          </div>
+
+          {/* Remaining two, as editorial entries */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 mt-12">
+            {qualifying.items.slice(4).map((item, i) => (
               <SectionReveal key={item.roman} delay={0.05 * i}>
                 <Link
                   to="/the-event"
@@ -227,26 +289,47 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Downstream prizes */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
-            {qualifying.downstream.map((d, i) => (
-              <SectionReveal key={d.title} delay={0.1 * i}>
-                <Link to="/the-event" className="group block photo-pop">
-                  <div className="plate sepia-hover aspect-[4/3]">
-                    <img src={d.image} alt={d.title} loading="lazy" decoding="async" />
-                  </div>
-                  <p className="eyebrow mt-5">{d.eyebrow}</p>
-                  <h3 className="font-display text-2xl text-royal-900 mt-2 underline-sweep inline-block">
-                    {d.title}
-                  </h3>
-                  <p className="font-serif text-ink-500 mt-3 leading-relaxed italic text-pretty">{d.body}</p>
-                  <span className="inline-flex items-center gap-2 eyebrow mt-4 text-ink-400 group-hover:text-brass-600 transition-colors">
-                    Read the prize details
-                    <ArrowRight size={12} className="arrow-reveal" />
-                  </span>
-                </Link>
-              </SectionReveal>
-            ))}
+          {/* Downstream prizes — framed plates with corner ornaments */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20">
+            {qualifying.downstream.map((d, i) => {
+              // Round counts (for count-up)
+              const rounds = d.title.includes('Nedbank') ? 7 : 3;
+              return (
+                <SectionReveal key={d.title} delay={0.1 * i}>
+                  <Link to="/the-event" className="group block">
+                    <FramedPlate tilt={i === 0 ? -0.6 : 0.6}>
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img
+                          src={d.image}
+                          alt={d.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover object-center transition-transform duration-[900ms] group-hover:scale-[1.015]"
+                        />
+                      </div>
+                    </FramedPlate>
+                    <p className="eyebrow mt-6">{d.eyebrow}</p>
+                    <h3 className="font-display text-2xl text-royal-900 mt-2 underline-sweep inline-block">
+                      {d.title}
+                    </h3>
+                    <p className="mt-2 inline-flex items-baseline gap-2 font-serif italic text-ink-500">
+                      <span className="eyebrow-ink text-[0.62rem]">Threshold</span>
+                      <span className="engraved-numeral text-lg text-brass-600">
+                        <CountUp from={0} to={rounds} duration={1400} format={(n) => Math.round(n).toString()} />
+                      </span>
+                      <span className="text-ink-400 text-sm">
+                        qualifying round{rounds === 1 ? '' : 's'}
+                      </span>
+                    </p>
+                    <p className="font-serif text-ink-500 mt-3 leading-relaxed italic text-pretty">{d.body}</p>
+                    <span className="inline-flex items-center gap-2 eyebrow mt-4 text-ink-400 group-hover:text-brass-600 transition-colors">
+                      Read the prize details
+                      <ArrowRight size={12} className="arrow-reveal" />
+                    </span>
+                  </Link>
+                </SectionReveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -308,7 +391,9 @@ export default function Home() {
             </h2>
             <hr className="brass-rule my-10 w-24 mx-auto" />
             <p className="font-serif text-[clamp(1.05rem,1.3vw,1.2rem)] text-ivory-200 max-w-2xl mx-auto leading-relaxed italic">
-              Nine remaining Saturdays. Three tee-time windows. One leaderboard that quietly gathers its own weight through the year.
+              <CountUp from={0} to={9} duration={1200} format={(n) => Math.round(n).toString()} /> remaining Saturdays.{' '}
+              <CountUp from={0} to={3} duration={1200} format={(n) => Math.round(n).toString()} /> tee-time windows.
+              One leaderboard that quietly gathers its own weight through the year.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

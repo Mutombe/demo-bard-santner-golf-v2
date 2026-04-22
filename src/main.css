@@ -397,13 +397,130 @@ body {
   opacity: 1;
 }
 
+/* -------------------------------------------------------------------
+   Engraved plate strip — Bard Santner × Royal Harare partnership
+   ------------------------------------------------------------------- */
+.engraved-plate {
+  position: relative;
+  border-top: 1px solid var(--color-brass-500);
+  border-bottom: 1px solid var(--color-brass-500);
+  background: linear-gradient(
+    180deg,
+    var(--color-ivory-50) 0%,
+    var(--color-paper-50) 50%,
+    var(--color-ivory-50) 100%
+  );
+  overflow: hidden;
+}
+.engraved-plate::before,
+.engraved-plate::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  background: var(--color-brass-500);
+  opacity: 0.35;
+}
+.engraved-plate::before { top: 6px; }
+.engraved-plate::after  { bottom: 6px; }
+
+/* Brass-glint sweep on hover */
+.engraved-plate .glint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 236, 201, 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-110%);
+  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.engraved-plate:hover .glint {
+  transform: translateX(110%);
+}
+
+/* -------------------------------------------------------------------
+   Page-curl hover for downloads
+   ------------------------------------------------------------------- */
+.page-curl {
+  position: relative;
+  overflow: hidden;
+}
+.page-curl::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 14px 14px 0;
+  border-color: transparent var(--color-ivory-200) transparent transparent;
+  filter: drop-shadow(-1px 1px 0 var(--color-brass-500));
+  transition: border-width 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.page-curl:hover::after {
+  border-width: 0 22px 22px 0;
+}
+
+/* Fleuron ornament */
+.fleuron {
+  display: inline-block;
+  color: var(--color-brass-500);
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 0.3em;
+  font-size: 1rem;
+}
+.fleuron::before { content: '\2766'; } /* ❦ */
+
+/* Museum plate caption */
+.museum-plate {
+  background: var(--color-ivory-50);
+  border: 1px solid var(--color-brass-500);
+  padding: 0.75rem 0.9rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-ink-600);
+  box-shadow: 0 1px 0 var(--color-ivory-300);
+}
+
+/* Hand-lettered oversized initial (used in pillar cards) */
+.illum-initial {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  color: var(--color-brass-500);
+  line-height: 0.85;
+  user-select: none;
+}
+
+/* Scroll-linked month scrubber */
+.month-scrubber {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(199, 125, 58, 0.14);
+  font-size: clamp(4rem, 12vw, 10rem);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .brass-rule-breathe,
   .asterism-breathe,
   .italic-tremble-in,
   .drop-cap-glow::first-letter,
-  .numeral-card[data-active="true"] {
+  .numeral-card[data-active="true"],
+  .engraved-plate .glint {
     animation: none !important;
+    transition: none !important;
   }
 }

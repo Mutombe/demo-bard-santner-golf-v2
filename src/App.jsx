@@ -23,6 +23,8 @@ import NotFound from './pages/NotFound';
 export default function App() {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
+  // Home extends behind the transparent navbar; inner pages sit below it.
+  const isHome = location.pathname === '/';
 
   return (
     <ErrorBoundary>
@@ -30,7 +32,7 @@ export default function App() {
       <Navbar onOpenSearch={() => setSearchOpen(true)} />
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <div className="min-h-screen pt-[calc(5rem+2.25rem)]">
+      <div className={isHome ? 'min-h-screen' : 'min-h-screen pt-[calc(5rem+2.25rem)]'}>
         <AnimatePresence mode="popLayout">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />

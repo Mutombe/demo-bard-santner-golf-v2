@@ -9,47 +9,79 @@ export default function Navbar({ onOpenSearch }) {
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
 
+  const isHome = pathname === '/';
+  // Home page initial state is transparent so the hero shows through.
+  // Inner pages are solid-paper from the start.
+  const transparent = isHome && !scrolled;
+
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Styling maps — "glass" (transparent) vs "paper" (solid)
+  const shellClass = transparent
+    ? 'bg-transparent border-b border-transparent'
+    : 'bg-paper-50 border-b border-ivory-300 shadow-[0_1px_0_rgba(11,37,64,0.04)]';
+  const ribbonBg = transparent
+    ? 'bg-royal-950/30 border-b border-ivory-100/10'
+    : 'bg-paper-50 border-b border-ivory-200/70';
+  const ribbonText = transparent ? 'text-ivory-200' : 'text-ink-400';
+  const ribbonAccent = transparent ? 'text-brass-300' : 'text-brass-600';
+  const navBg = transparent ? 'bg-transparent' : 'bg-paper-50';
+  const logoFilter = transparent ? 'brightness-0 invert opacity-95' : '';
+  const divider = transparent ? 'bg-brass-300/50' : 'bg-brass-500/50';
+  const linkIdle = transparent ? 'text-ivory-100' : 'text-ink-500';
+  const linkActive = transparent ? 'text-ivory-50 border-brass-400' : 'text-royal-900 border-brass-500';
+  const linkHover = transparent
+    ? 'hover:text-ivory-50 hover:border-brass-400/70'
+    : 'hover:text-royal-900 hover:border-brass-500/60';
+  const searchBtn = transparent
+    ? 'text-ivory-100 hover:text-ivory-50 hover:bg-ivory-100/10'
+    : 'text-ink-500 hover:text-royal-900 hover:bg-ivory-100';
+  const reserveBtn = transparent
+    ? 'bg-brass-500 text-royal-950 border border-brass-500 hover:bg-ivory-50 hover:text-royal-950 hover:border-ivory-50'
+    : 'bg-royal-900 text-ivory-50 border border-royal-900 hover:bg-brass-500 hover:border-brass-500';
+  const menuBtn = transparent
+    ? 'text-ivory-50 hover:bg-ivory-100/10'
+    : 'text-royal-900 hover:bg-ivory-100';
+
   return (
     <>
       <header
         className={[
-          'fixed top-0 inset-x-0 z-40 transition-shadow duration-500 bg-paper-50 border-b',
-          scrolled ? 'border-ivory-300 shadow-[0_1px_0_rgba(11,37,64,0.04)]' : 'border-ivory-200',
+          'fixed top-0 inset-x-0 z-40 transition-all duration-500',
+          shellClass,
         ].join(' ')}
       >
         {/* Thin partnership ribbon */}
-        <div className="border-b border-ivory-200/70 bg-paper-50">
-          <div className="max-w-7xl mx-auto px-5 sm:px-10 py-2 flex items-center justify-between text-[0.66rem] tracking-[0.25em] uppercase font-sans text-ink-400">
+        <div className={['transition-colors duration-500', ribbonBg].join(' ')}>
+          <div className={['max-w-7xl mx-auto px-5 sm:px-10 py-2 flex items-center justify-between text-[0.66rem] tracking-[0.25em] uppercase font-sans transition-colors duration-500', ribbonText].join(' ')}>
             <span className="hidden sm:inline">Season MMXXV · A loyalty of eleven rounds</span>
             <span className="sm:hidden">Season MMXXV</span>
-            <span className="hidden md:inline text-brass-600">golf@bardsantner.com · +263 861 2000 700</span>
+            <span className={['hidden md:inline transition-colors duration-500', ribbonAccent].join(' ')}>golf@bardsantner.com · +263 861 2000 700</span>
           </div>
         </div>
 
-        <nav className="max-w-7xl mx-auto px-5 sm:px-10 h-20 flex items-center justify-between gap-6 bg-paper-50">
+        <nav className={['max-w-7xl mx-auto px-5 sm:px-10 h-20 flex items-center justify-between gap-6 transition-colors duration-500', navBg].join(' ')}>
           {/* Dual partnership mark */}
           <Link to="/" className="flex items-center gap-4 group shrink-0" aria-label="Home">
             <img
               src={partnership.sponsor.mark}
               alt="Bard Santner Inc"
-              className="h-8 sm:h-9 w-auto"
+              className={['h-8 sm:h-9 w-auto transition-[filter] duration-500', logoFilter].join(' ')}
               loading="eager"
               decoding="async"
               onError={(e) => (e.currentTarget.style.display = 'none')}
             />
-            <span className="h-8 w-px bg-brass-500/50 hidden sm:block" aria-hidden />
+            <span className={['h-8 w-px hidden sm:block transition-colors duration-500', divider].join(' ')} aria-hidden />
             <img
               src={partnership.host.mark}
               alt="Royal Harare Golf Club · est. 1898"
-              className="h-9 sm:h-11 w-auto hidden sm:block"
+              className={['h-9 sm:h-11 w-auto hidden sm:block transition-[filter] duration-500', logoFilter].join(' ')}
               loading="eager"
               decoding="async"
               onError={(e) => (e.currentTarget.style.display = 'none')}
@@ -66,9 +98,7 @@ export default function Navbar({ onOpenSearch }) {
                   className={({ isActive }) =>
                     [
                       'transition-colors duration-300 pb-1 border-b',
-                      isActive
-                        ? 'text-royal-900 border-brass-500'
-                        : 'text-ink-500 border-transparent hover:text-royal-900 hover:border-brass-500/60',
+                      isActive ? linkActive : [linkIdle, 'border-transparent', linkHover].join(' '),
                     ].join(' ')
                   }
                 >
@@ -83,19 +113,19 @@ export default function Navbar({ onOpenSearch }) {
             <button
               onClick={onOpenSearch}
               aria-label="Open search"
-              className="h-10 w-10 grid place-items-center text-ink-500 hover:text-royal-900 hover:bg-ivory-100 transition-colors"
+              className={['h-10 w-10 grid place-items-center transition-colors duration-500', searchBtn].join(' ')}
             >
               <MagnifyingGlass size={18} weight="regular" />
             </button>
             <Link
               to="/register"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.22em] uppercase border border-royal-900 hover:bg-brass-500 hover:border-brass-500 transition-colors"
+              className={['hidden sm:inline-flex items-center gap-2 px-5 py-2.5 font-sans text-[0.72rem] tracking-[0.22em] uppercase transition-colors duration-500', reserveBtn].join(' ')}
             >
               Reserve <span aria-hidden>→</span>
             </Link>
             <button
               onClick={() => setOpen((o) => !o)}
-              className="lg:hidden h-10 w-10 grid place-items-center text-royal-900 hover:bg-ivory-100 transition-colors"
+              className={['lg:hidden h-10 w-10 grid place-items-center transition-colors duration-500', menuBtn].join(' ')}
               aria-label="Open menu"
               aria-expanded={open}
             >

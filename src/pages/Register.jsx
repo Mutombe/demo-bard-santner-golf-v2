@@ -1,5 +1,6 @@
 import { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ArrowRight, ArrowLeft, Check, WhatsappLogo, EnvelopeSimple } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 
@@ -8,8 +9,10 @@ import SEO from '../components/SEO';
 import SectionReveal from '../components/SectionReveal';
 import RomanNumeralHeading from '../components/RomanNumeralHeading';
 import TeeTimeCard from '../components/TeeTimeCard';
+import Prose from '../components/Prose';
+import WaxSealButton from '../components/WaxSealButton';
 import {
-  calendar, teeWindows, shirtSizes, genders, dietaryOptions, contact,
+  calendar, teeWindows, shirtSizes, genders, dietaryOptions, contact, proseHtml,
 } from '../data/siteData';
 
 const initialForm = {
@@ -120,7 +123,11 @@ export default function Register() {
             eyebrow="The Entry"
             title="Reserve a"
             italic="tee time"
-            subtitle="Entries close at 17:00 on the Wednesday preceding each round. The draw is emailed by Thursday. Late entries, by custom of the committee, are not accepted."
+          />
+          <Prose
+            as="p"
+            className="font-serif text-[clamp(1.05rem,1.4vw,1.25rem)] text-ink-500 mt-5 max-w-2xl text-pretty leading-relaxed"
+            html={proseHtml.registerIntro}
           />
         </SectionReveal>
       </section>
@@ -155,9 +162,9 @@ export default function Register() {
         </div>
       </section>
 
-      {/* Step content */}
-      <section className="py-16 lg:py-20 bg-paper-50">
-        <div className="max-w-3xl mx-auto px-5 sm:px-8">
+      {/* Step content — on paper-texture background */}
+      <section className="py-16 lg:py-20 bg-paper-50 relative paper-grain">
+        <div className="max-w-3xl mx-auto px-5 sm:px-8 relative">
           <SectionReveal key={step}>
             <div className="mb-10">
               <p className="eyebrow mb-3"><span className="engraved-numeral mr-3">{steps[step].roman}</span>{steps[step].title}</p>
@@ -401,23 +408,24 @@ function StepReview({ form, selectedEvent, selectedWindow, onWhatsApp, onEmail }
 
       <hr className="brass-rule my-10" />
 
+      <p className="text-center font-display italic text-royal-900 text-lg mb-6">
+        Press the <em className="text-brass-600">wax seal</em> to dispatch your entry.
+      </p>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <button
+        <WaxSealButton
           onClick={onWhatsApp}
-          className="inline-flex items-center justify-center gap-3 px-6 py-4 text-ivory-50 font-sans text-[0.78rem] tracking-[0.25em] uppercase transition-colors"
-          style={{ background: '#128C7E' }}
-        >
-          <WhatsappLogo size={18} weight="fill" /> Dispatch via WhatsApp
-        </button>
-        <button
+          sublabel="Whatsappian Dispatch"
+          label="Send via WhatsApp"
+        />
+        <WaxSealButton
           onClick={onEmail}
-          className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-brass-600 hover:text-ivory-50 transition-colors"
-        >
-          <EnvelopeSimple size={18} weight="regular" /> Dispatch via Email
-        </button>
+          sublabel="Written Correspondence"
+          label="Send via Email"
+        />
       </div>
 
-      <p className="mt-6 text-center font-serif italic text-ink-400 text-sm">
+      <p className="mt-8 text-center font-serif italic text-ink-400 text-sm">
         The committee will confirm your place in the draw by email on the Thursday preceding.
       </p>
     </div>

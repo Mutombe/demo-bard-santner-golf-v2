@@ -5,7 +5,11 @@ import PageTransition from '../components/PageTransition';
 import SEO from '../components/SEO';
 import SectionReveal from '../components/SectionReveal';
 import RomanNumeralHeading from '../components/RomanNumeralHeading';
-import { eventEssay, qualifying, faq, brand } from '../data/siteData';
+import CountUp from '../components/CountUp';
+import Prose from '../components/Prose';
+import IlluminatedCapitalCard from '../components/IlluminatedCapitalCard';
+import FramedPlate from '../components/FramedPlate';
+import { eventEssay, qualifying, faq, partnership, proseHtml } from '../data/siteData';
 
 export default function TheEvent() {
   return (
@@ -56,42 +60,54 @@ export default function TheEvent() {
         </SectionReveal>
       </section>
 
-      {/* Essay body — editorial columns */}
-      <article className="max-w-4xl mx-auto px-5 sm:px-8 pb-20 lg:pb-28 prose">
+      {/* Essay body — editorial, with brass inline links throughout */}
+      <article className="max-w-4xl mx-auto px-5 sm:px-8 pb-20 lg:pb-28">
         <SectionReveal>
-          <p className="drop-cap drop-cap-glow font-serif text-[1.2rem] leading-[1.85] text-ink-700 text-pretty">
-            {eventEssay.leadParagraph}
-          </p>
-          {eventEssay.paragraphs.map((p, i) => (
-            <p key={i} className="font-serif text-[1.15rem] leading-[1.85] text-ink-700 text-pretty mt-6">
-              {p}
-            </p>
-          ))}
+          <Prose
+            as="p"
+            className="drop-cap drop-cap-glow font-serif text-[1.2rem] leading-[1.9] text-ink-700 text-pretty"
+            html={proseHtml.eventLead}
+          />
+          <Prose as="p" className="font-serif text-[1.15rem] leading-[1.85] text-ink-700 text-pretty mt-6" html={proseHtml.eventPara1} />
+          <Prose as="p" className="font-serif text-[1.15rem] leading-[1.85] text-ink-700 text-pretty mt-6" html={proseHtml.eventPara2} />
+          <Prose as="p" className="font-serif text-[1.15rem] leading-[1.85] text-ink-700 text-pretty mt-6" html={proseHtml.eventPara3} />
 
           <span className="asterism asterism-breathe" aria-hidden />
 
-          <p className="pull-quote text-center italic-tremble-in">
-            {eventEssay.closingLine}
-          </p>
+          <Prose as="p" className="pull-quote text-center italic-tremble-in" html={proseHtml.eventClosing} />
 
           <hr className="brass-rule brass-rule-breathe mt-16" />
         </SectionReveal>
       </article>
 
-      {/* Qualifying */}
-      <section className="bg-ivory-50 py-24 lg:py-28 relative paper-grain">
+      {/* FOUR WAYS TO QUALIFY — illuminated-capital pillar cards */}
+      <section id="qualify" className="bg-ivory-50 py-24 lg:py-28 relative paper-grain">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
           <SectionReveal>
             <RomanNumeralHeading
               eyebrow={qualifying.eyebrow}
-              title="How"
-              italic="one qualifies"
+              title="Four ways"
+              italic="to qualify"
               subtitle={qualifying.subtitle}
             />
           </SectionReveal>
 
-          <ol className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-10">
-            {qualifying.items.map((item, i) => (
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7">
+            {qualifying.items.slice(0, 4).map((item, i) => (
+              <SectionReveal key={item.roman} delay={0.05 * i}>
+                <IlluminatedCapitalCard
+                  letter={item.roman}
+                  eyebrow={`Criterion ${item.roman}`}
+                  title={item.title}
+                  body={item.body}
+                />
+              </SectionReveal>
+            ))}
+          </div>
+
+          {/* The trailing two */}
+          <ol className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-10">
+            {qualifying.items.slice(4).map((item, i) => (
               <SectionReveal key={item.roman} delay={0.05 * i} as="li">
                 <div className="flex items-start gap-5">
                   <span className="engraved-numeral text-3xl shrink-0 w-10">{item.roman}</span>
@@ -103,6 +119,97 @@ export default function TheEvent() {
               </SectionReveal>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* PRIZE LADDER — two framed plates with wax-seal overlay */}
+      <section id="prizes" className="py-24 bg-paper-50">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <SectionReveal>
+            <RomanNumeralHeading
+              eyebrow="The Prize Ladder"
+              title="Two"
+              italic="destinations"
+              subtitle="What awaits the player who plays loyally — the travel prize that crowns the series, and the travel invitation that may arrive sooner."
+            />
+          </SectionReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 mt-14">
+            {qualifying.downstream.map((d, i) => {
+              const rounds = d.title.includes('Nedbank') ? 7 : 3;
+              return (
+                <SectionReveal key={d.title} delay={0.08 * i}>
+                  <article id={d.title.includes('Nedbank') ? 'nedbank' : 'sa-open'}>
+                    <FramedPlate tilt={i === 0 ? -0.6 : 0.6}>
+                      <div className="aspect-[4/3] relative overflow-hidden">
+                        <img
+                          src={d.image}
+                          alt={d.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover object-center"
+                        />
+                        {/* Wax seal over the corner */}
+                        <div className="absolute top-4 right-4 grid place-items-center">
+                          <div className="h-14 w-14 rounded-full grid place-items-center text-ivory-50 font-display italic text-xl"
+                               style={{
+                                 background: 'radial-gradient(circle at 40% 40%, #D3874A 0%, #A4652A 55%, #5E3916 100%)',
+                                 boxShadow: '0 2px 6px rgba(62,38,16,0.4)',
+                               }}>
+                            <span className="opacity-90">B</span>
+                          </div>
+                        </div>
+                      </div>
+                    </FramedPlate>
+                    <p className="eyebrow mt-6">{d.eyebrow}</p>
+                    <h3 className="font-display text-2xl text-royal-900 mt-2">{d.title}</h3>
+                    <p className="mt-2 inline-flex items-baseline gap-3 font-serif italic text-ink-500">
+                      <span className="eyebrow-ink text-[0.62rem]">Threshold</span>
+                      <span className="engraved-numeral text-2xl text-brass-600">
+                        <CountUp from={0} to={rounds} duration={1500} />
+                      </span>
+                      <span className="text-ink-400 text-sm">
+                        qualifying round{rounds === 1 ? '' : 's'}
+                      </span>
+                    </p>
+                    <p className="font-serif text-ink-500 mt-3 leading-relaxed italic text-pretty">{d.body}</p>
+                  </article>
+                </SectionReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* SPONSOR CAMEO — partnership crests drifting */}
+      <section className="py-20 bg-ivory-50 border-y border-ivory-300 relative paper-grain">
+        <div className="max-w-5xl mx-auto px-6 relative">
+          <SectionReveal>
+            <p className="eyebrow text-center mb-6">The Partnership</p>
+            <div className="engraved-plate py-10">
+              <div className="flex items-center justify-center gap-10 flex-wrap">
+                <div className="text-center">
+                  <div className="h-24 w-24 mx-auto border-2 border-brass-500 rounded-full grid place-items-center bg-paper-50">
+                    <img src={partnership.sponsor.mark} alt="Bard Santner" className="h-12 w-auto" />
+                  </div>
+                  <p className="mt-3 font-display italic text-royal-900">Bard Santner Inc</p>
+                  <p className="eyebrow-ink text-[0.6rem] mt-1">Sponsor</p>
+                </div>
+                <span className="fleuron" aria-hidden />
+                <div className="text-center">
+                  <div className="h-24 w-24 mx-auto border-2 border-brass-500 rounded-full grid place-items-center bg-paper-50">
+                    <img src={partnership.host.mark} alt="Royal Harare Golf Club" className="h-14 w-auto" />
+                  </div>
+                  <p className="mt-3 font-display italic text-royal-900">Royal Harare Golf Club</p>
+                  <p className="eyebrow-ink text-[0.6rem] mt-1">
+                    Host · est.{' '}
+                    <CountUp from={1800} to={1898} duration={1500} format={(n) => Math.round(n).toString()} />
+                  </p>
+                </div>
+              </div>
+              <span className="glint" aria-hidden />
+            </div>
+          </SectionReveal>
         </div>
       </section>
 

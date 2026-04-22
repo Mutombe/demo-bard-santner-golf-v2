@@ -4,7 +4,9 @@ import { DownloadSimple, Printer } from '@phosphor-icons/react';
 import PageTransition from '../components/PageTransition';
 import SEO from '../components/SEO';
 import SectionReveal from '../components/SectionReveal';
-import { conditions, partnership, brand } from '../data/siteData';
+import CountUp from '../components/CountUp';
+import Prose from '../components/Prose';
+import { conditions, partnership, brand, proseHtml } from '../data/siteData';
 
 export default function TournamentConditions() {
   return (
@@ -37,7 +39,7 @@ export default function TournamentConditions() {
               <a
                 href={conditions.pdfHref}
                 download
-                className="inline-flex items-center gap-2 px-5 py-3 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-brass-500 transition-colors"
+                className="page-curl inline-flex items-center gap-2 px-5 py-3 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-brass-500 transition-colors"
               >
                 <DownloadSimple size={14} weight="regular" /> {conditions.pdfLabel}
               </a>
@@ -77,31 +79,50 @@ export default function TournamentConditions() {
         <hr className="brass-rule my-14" />
 
         {/* Sections */}
-        <div className="prose">
-          {conditions.sections.map((s, i) => (
-            <SectionReveal key={s.roman} delay={0.04 * i}>
-              <section className="mt-10 first:mt-0">
-                <div className="flex items-baseline gap-5 mb-4">
-                  <span className="engraved-numeral text-3xl shrink-0">{s.roman}</span>
-                  <h2 className="font-display italic text-[clamp(1.4rem,2.4vw,2rem)] text-royal-900 leading-tight">
-                    {s.title}
-                  </h2>
-                </div>
-                <p className="font-serif text-[1.1rem] leading-[1.8] text-ink-600 text-pretty pl-0 sm:pl-14">
-                  {s.body}
-                </p>
-                {i < conditions.sections.length - 1 && <hr className="brass-rule brass-rule-breathe mt-12" />}
-              </section>
-            </SectionReveal>
-          ))}
+        <div>
+          {conditions.sections.map((s, i) => {
+            // Alternate ornament between sections
+            const ornament = i % 2 === 0 ? '❦' : '⁂';
+            // Anchor ids for deep-linking
+            const anchorId = s.title.toLowerCase().includes('format') ? 'format'
+              : s.title.toLowerCase().includes('draw') ? 'draw'
+              : s.title.toLowerCase().includes('prize') ? 'prizes'
+              : s.title.toLowerCase().includes('eligib') ? 'handicap'
+              : undefined;
+            return (
+              <SectionReveal key={s.roman} delay={0.04 * i}>
+                <section id={anchorId} className="mt-10 first:mt-0">
+                  <div className="flex items-baseline gap-5 mb-4">
+                    <span className="engraved-numeral text-3xl shrink-0">{s.roman}</span>
+                    <h2 className="font-display italic text-[clamp(1.4rem,2.4vw,2rem)] text-royal-900 leading-tight">
+                      {s.title}
+                    </h2>
+                    <span aria-hidden className="text-brass-500 font-display italic text-2xl ml-auto select-none">
+                      {ornament}
+                    </span>
+                  </div>
+                  <p className="drop-cap drop-cap-glow font-serif text-[1.1rem] leading-[1.85] text-ink-600 text-pretty pl-0 sm:pl-14">
+                    {s.body}
+                  </p>
+                  {i < conditions.sections.length - 1 && <hr className="brass-rule brass-rule-breathe mt-12" />}
+                </section>
+              </SectionReveal>
+            );
+          })}
         </div>
 
         <span className="asterism asterism-breathe" aria-hidden />
 
         <SectionReveal>
-          <p className="font-display italic text-center text-ink-500 text-lg">
-            Issued under the authority of the Tournament Committee,<br />
-            Royal Harare Golf Club, Season MMXXV.
+          <Prose
+            as="p"
+            className="font-display italic text-center text-ink-500 text-lg"
+            html={proseHtml.rulesFooter + '<br/>Season MMXXV.'}
+          />
+          <p className="mt-4 text-center eyebrow-ink">
+            Committee members —{' '}
+            <CountUp from={0} to={conditions.committee.members.length} duration={1400} className="engraved-numeral text-brass-600 not-italic" />
+            , in service this season.
           </p>
         </SectionReveal>
       </article>
@@ -116,7 +137,7 @@ export default function TournamentConditions() {
           <a
             href={conditions.pdfHref}
             download
-            className="inline-flex items-center gap-3 px-7 py-3.5 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-brass-500 transition-colors"
+            className="page-curl inline-flex items-center gap-3 px-7 py-3.5 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-brass-500 transition-colors"
           >
             <DownloadSimple size={16} /> Download the PDF
           </a>

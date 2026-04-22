@@ -7,7 +7,22 @@ import PageTransition from '../components/PageTransition';
 import SEO from '../components/SEO';
 import SectionReveal from '../components/SectionReveal';
 import RomanNumeralHeading from '../components/RomanNumeralHeading';
-import { media } from '../data/siteData';
+import CountUp from '../components/CountUp';
+import Prose from '../components/Prose';
+import { media, proseHtml } from '../data/siteData';
+
+// Convert an integer (1-99) to an uppercase Roman numeral for captions.
+function toRoman(num) {
+  const map = [
+    [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
+    [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I'],
+  ];
+  let result = '';
+  for (const [v, s] of map) {
+    while (num >= v) { result += s; num -= v; }
+  }
+  return result;
+}
 
 export default function MediaCenter() {
   const [tag, setTag] = useState('All');
@@ -59,8 +74,16 @@ export default function MediaCenter() {
             eyebrow={media.eyebrow}
             title="A record"
             italic="of the season"
-            subtitle={media.subtitle}
           />
+          <Prose
+            as="p"
+            className="font-serif text-[clamp(1.05rem,1.4vw,1.25rem)] text-ink-500 mt-5 max-w-2xl text-pretty leading-relaxed"
+            html={proseHtml.galleryIntro}
+          />
+          <p className="mt-3 eyebrow-ink">
+            <CountUp from={0} to={media.items.length} duration={1500} className="engraved-numeral text-brass-600 not-italic" />{' '}
+            plates · {media.filterTags.length - 1} collections
+          </p>
         </SectionReveal>
       </section>
 
@@ -86,41 +109,55 @@ export default function MediaCenter() {
         </div>
       </section>
 
-      {/* Caption-first masonry */}
+      {/* Caption-first masonry — each plate with museum-card caption */}
       <section className="max-w-7xl mx-auto px-5 sm:px-8 pb-24">
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
-          {filtered.map((m, i) => (
-            <SectionReveal key={m.id} delay={0.03 * (i % 8)}>
-              <figure className="break-inside-avoid mb-6 sm:mb-7 group">
-                <button
-                  onClick={() => openLightbox(i)}
-                  className="plate sepia-hover block w-full text-left"
-                  aria-label={`Open: ${m.caption}`}
+          {filtered.map((m, i) => {
+            const plateNo = toRoman(i + 1);
+            const tilt = (i % 3 === 0 ? -1.2 : i % 3 === 1 ? 0.8 : 1.5);
+            // Parallax offset — slight y displacement at varying rates
+            const parallaxStyle = { transform: `translateY(${(i % 4) * 6}px)` };
+            return (
+              <SectionReveal key={m.id} delay={0.03 * (i % 8)}>
+                <motion.figure
+                  className="break-inside-avoid mb-6 sm:mb-7 group"
+                  style={parallaxStyle}
+                  whileHover={{ rotate: tilt, y: -4 }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 22 }}
                 >
-                  <img
-                    src={m.src}
-                    alt={m.caption}
-                    className="w-full h-auto"
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) => (e.currentTarget.style.opacity = '0.2')}
-                  />
-                </button>
-                <figcaption className="mt-3 px-1">
-                  <p className="font-serif italic text-ink-600 text-[1.02rem] leading-snug text-pretty">
-                    {m.caption}
-                  </p>
-                  <p className="mt-2 eyebrow-ink flex items-center gap-3 flex-wrap">
-                    <span className="engraved-numeral not-italic text-sm tracking-normal">{m.tag}</span>
-                    <span className="text-ink-300">·</span>
-                    <span>{m.date}</span>
-                    <span className="text-ink-300">·</span>
-                    <span className="italic font-serif normal-case tracking-normal text-ink-400">{m.credit}</span>
-                  </p>
-                </figcaption>
-              </figure>
-            </SectionReveal>
-          ))}
+                  <button
+                    onClick={() => openLightbox(i)}
+                    className="plate sepia-hover block w-full text-left"
+                    aria-label={`Open plate ${plateNo}: ${m.caption}`}
+                  >
+                    <img
+                      src={m.src}
+                      alt={m.caption}
+                      className="w-full h-auto"
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => (e.currentTarget.style.opacity = '0.2')}
+                    />
+                  </button>
+                  <figcaption className="museum-plate">
+                    <div className="flex items-baseline justify-between gap-3 mb-1">
+                      <span className="eyebrow-ink text-[0.62rem] not-italic">Plate No.</span>
+                      <span className="engraved-numeral not-italic text-sm text-brass-600">{plateNo}</span>
+                    </div>
+                    <hr className="brass-rule mb-2" />
+                    <p className="text-[1rem] leading-snug text-pretty">{m.caption}</p>
+                    <p className="mt-1.5 eyebrow-ink not-italic flex items-center gap-2 flex-wrap text-[0.58rem]">
+                      <span className="tracking-normal">{m.tag}</span>
+                      <span className="text-ink-300">·</span>
+                      <span>{m.date}</span>
+                      <span className="text-ink-300">·</span>
+                      <span className="italic font-serif normal-case tracking-normal text-ink-400">{m.credit}</span>
+                    </p>
+                  </figcaption>
+                </motion.figure>
+              </SectionReveal>
+            );
+          })}
         </div>
       </section>
 
@@ -143,17 +180,19 @@ export default function MediaCenter() {
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); prev(); }}
-              aria-label="Previous"
-              className="absolute left-5 h-12 w-12 grid place-items-center text-ivory-100 border border-ivory-100/30 hover:bg-ivory-100/10 transition"
+              aria-label="Previous Plate"
+              className="absolute left-5 h-12 px-3 grid place-items-center text-ivory-100 border border-ivory-100/30 hover:bg-ivory-100/10 transition flex flex-row gap-2"
             >
-              <CaretLeft size={22} />
+              <CaretLeft size={18} />
+              <span className="eyebrow text-ivory-100 text-[0.6rem] hidden sm:inline">Previous Plate</span>
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); next(); }}
-              aria-label="Next"
-              className="absolute right-5 h-12 w-12 grid place-items-center text-ivory-100 border border-ivory-100/30 hover:bg-ivory-100/10 transition"
+              aria-label="Next Plate"
+              className="absolute right-5 h-12 px-3 grid place-items-center text-ivory-100 border border-ivory-100/30 hover:bg-ivory-100/10 transition flex flex-row gap-2"
             >
-              <CaretRight size={22} />
+              <span className="eyebrow text-ivory-100 text-[0.6rem] hidden sm:inline">Next Plate</span>
+              <CaretRight size={18} />
             </button>
             <motion.figure
               className="max-w-6xl w-full"
@@ -172,6 +211,11 @@ export default function MediaCenter() {
                 />
               </div>
               <figcaption className="mt-4 text-ivory-200 text-center">
+                <p className="eyebrow text-brass-400 mb-2">
+                  Plate <span className="engraved-numeral text-brass-300 mx-1">{toRoman(lightbox + 1)}</span>
+                  <span className="text-ivory-300 mx-1">of</span>
+                  <span className="engraved-numeral text-brass-300">{toRoman(filtered.length)}</span>
+                </p>
                 <p className="font-serif italic text-lg text-pretty">{current.caption}</p>
                 <p className="eyebrow mt-2 text-brass-400">{current.tag} · {current.date} · {current.credit}</p>
               </figcaption>

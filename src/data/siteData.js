@@ -550,6 +550,114 @@ export const media = {
 };
 
 // -------------------------------------------------------------
+// HTML-augmented prose — every paragraph carries inline brass links
+// via .prose-link, because no paragraph on this site should be naked.
+// -------------------------------------------------------------
+export const proseHtml = {
+  // --- Home: essay body (three paragraphs + lead + closing line) ---
+  homeLead:
+    'The Bard Santner Loyalty Event is, at its heart, a calendar. Eleven qualifying rounds staged at <a class="prose-link" href="/the-course">Royal Harare Golf Club</a> between February and November 2025, open to the fully paid-up members of a club that has been quietly composing itself beneath the Msasa since 1898. Points accrue in the patient idiom of Stableford. A player plays in seven rounds or more; the best seven totals are added; a leader emerges; the leader walks, two weeks later, onto the manicured theatre of <a class="prose-link" href="https://suninternational.com/sun-city" target="_blank" rel="noreferrer">Sun City</a> for the <a class="prose-link" href="/the-event#nedbank">Nedbank Golf Challenge</a>.',
+  homePara1:
+    'The series is not a tournament in the shouted sense of the word. It is a procession. The prize — an all-expenses-paid journey to watch one of the four great African golf weeks — is given not to the player who plays best on a single glorious afternoon, but to the player who <a class="prose-link" href="/calendar">turns up, month after month</a>, and plays consistently. It rewards something rarer than form.',
+  homePara2:
+    'Format is <a class="prose-link" href="/tournament-conditions#format">Medal Stableford</a>, with a 75% handicap allowance — a quiet generosity. Men play from the White Markers, women from the Red. The Handicap Index ceiling is 21.2 for men, 26.2 for women; points are awarded in the old ledger: three for a birdie, two for a par, one for a bogey. A player who cannot score must pick up. The arithmetic is clean. The walking is unhurried.',
+  homePara3:
+    '<a class="prose-link" href="/the-course">Royal Harare</a> itself is the silent protagonist. Parkland, not heathland; dominated not by gorse but by the Msasa tree whose leaves turn the terracotta of worn leather in September. Its par-72 traverses 6,888 metres of fairway laid out in 1898 and patiently refined for five generations of members. In 1979 <em>Golf Digest</em> named it one of the fifty finest courses outside the United States — a sentence the club has, with admirable restraint, never taken down from the clubhouse wall.',
+  homeClosing:
+    'The <a class="prose-link" href="/the-event">Road to the S.A. Golf Challenge</a>, then, is what the members call it: a season, a loyalty, a long-form conversation with a course one already knows.',
+
+  // --- Home: captioning under framed flags photo ---
+  homeFlagsCaption:
+    'Flags at the opening round. The <a class="prose-link" href="/calendar">Highveld sky</a> is almost aggressively blue in February.',
+
+  // --- Event page (same long-form, but with richer linking) ---
+  eventLead:
+    'The <a class="prose-link" href="/">Bard Santner Loyalty Event</a> is, at its heart, a calendar. Eleven qualifying rounds staged at <a class="prose-link" href="/the-course">Royal Harare Golf Club</a> between February and November 2025, open to the fully paid-up members of a club that has been quietly composing itself beneath the Msasa since 1898. Points accrue in the patient idiom of Stableford. A player plays in seven rounds or more; the best seven totals are added; a leader emerges; the leader walks, two weeks later, onto the manicured theatre of <a class="prose-link" href="https://suninternational.com/sun-city" target="_blank" rel="noreferrer">Sun City</a> for the <a class="prose-link" href="https://www.nedbankgolfchallenge.com" target="_blank" rel="noreferrer">Nedbank Golf Challenge</a>.',
+  eventPara1:
+    'The series is not a tournament in the shouted sense of the word. It is a procession. The prize — an all-expenses-paid journey to watch one of the four great African golf weeks — is given not to the player who plays best on a single glorious afternoon, but to the player who <a class="prose-link" href="/calendar">turns up, month after month</a>, and plays consistently. It rewards something rarer than form.',
+  eventPara2:
+    'Format is <a class="prose-link" href="/tournament-conditions">Medal Stableford</a>, with a 75% handicap allowance — a quiet generosity. Men play from the White Markers, women from the Red. The <a class="prose-link" href="/tournament-conditions#handicap">Handicap Index ceiling</a> is 21.2 for men, 26.2 for women; points are awarded in the old ledger: three for a birdie, two for a par, one for a bogey. A player who cannot score must pick up. The arithmetic is clean. The walking is unhurried.',
+  eventPara3:
+    '<a class="prose-link" href="/the-course">Royal Harare</a> itself is the silent protagonist. Parkland, not heathland; dominated not by gorse but by the Msasa tree whose leaves turn the terracotta of worn leather in September. Its par-72 traverses <strong>6,888 metres</strong> of fairway laid out in 1898 and patiently refined for five generations of members. In <a class="prose-link" href="/the-course#golf-digest">1979 Golf Digest</a> named it one of the fifty finest courses outside the United States — a sentence the club has, with admirable restraint, never taken down from the clubhouse wall.',
+  eventClosing:
+    'The <a class="prose-link" href="/">Road to the S.A. Golf Challenge</a>, then, is what the members call it: a season, a loyalty, a long-form conversation with a course one already knows.',
+
+  // --- Course page (deeper referencing to the Highveld, Queen, Msasa tree) ---
+  coursePara1:
+    '<a class="prose-link" href="/the-course">Royal Harare Golf Club</a> was founded in 1898, seven years after the occupation of Mashonaland and on land set aside, even then, for a quieter purpose than commerce. The original layout — traced through what was then sparse savanna — has been walked, watered, and refined by five generations of greenkeepers into the parkland you see today: wide-bodied Msasa and Jacaranda avenues, lakes that were once seasonal pans, a Royal charter granted by <a class="prose-link" href="https://en.wikipedia.org/wiki/Elizabeth_II" target="_blank" rel="noreferrer">Queen Elizabeth II</a> in 1960.',
+  coursePara2:
+    'The club carries its ranking lightly. In 1979, <em>Golf Digest</em> placed Royal Harare among the fifty finest courses outside the United States — a verdict unusual for its era, rarer still for an African parkland course, and never rescinded. The stewardship the ranking implied has been honoured: the greens remain true, the trees kept well, the course <a class="prose-link" href="/calendar">playable in all seasons</a> but at its most beautiful in the shoulder weeks of April and October.',
+  coursePara3:
+    'The 6,888-metre par-72 routing balances generous driving corridors with greens defended by slope and bunker rather than by brutality. It is not a long course by modern championship standards, and it has never pretended to be. It is a course for the thinking golfer — a course that gathers weight by the <a class="prose-link" href="/the-course#signature">back nine</a>, and rewards a player who has learned, over many visits, where the trouble actually is.',
+
+  // --- Calendar page footnote enriched ---
+  calendarFootnote:
+    'Two additional rounds complete the eleven — a player need only play in seven to remain in contention for the <a class="prose-link" href="/the-event#prizes">final prize</a>. Full rules live in the <a class="prose-link" href="/tournament-conditions">tournament conditions</a>.',
+
+  // --- Register page intro prose ---
+  registerIntro:
+    'Entries close at <strong>17:00</strong> on the Wednesday preceding each round. The draw is emailed by Thursday. Late entries, by <a class="prose-link" href="/tournament-conditions#draw">custom of the committee</a>, are not accepted. Questions to <a class="prose-link" href="/contact">the Tournament Director</a>.',
+
+  // --- Contact page intro prose ---
+  contactIntro:
+    'For questions on the <a class="prose-link" href="/tournament-conditions">draw</a>, the handicap allowance, or the <a class="prose-link" href="/the-event#prizes">travel prizes</a>, reach the Tournament Director at <a class="prose-link" href="https://bardsantner.com" target="_blank" rel="noreferrer">Bard Santner Inc</a>. For course and clubhouse matters, the <a class="prose-link" href="/the-course">Royal Harare office</a>.',
+
+  // --- Rules page footer prose ---
+  rulesFooter:
+    'Issued under the authority of the <a class="prose-link" href="/tournament-conditions#committee">Tournament Committee</a>, <a class="prose-link" href="/the-course">Royal Harare Golf Club</a>, Season MMXXV.',
+
+  // --- Gallery intro prose ---
+  galleryIntro:
+    'Photographs from the <a class="prose-link" href="/the-event">Bard Santner Loyalty Event</a> and the fairways of <a class="prose-link" href="/the-course">Royal Harare Golf Club</a> — course, clubhouse, players, and the <a class="prose-link" href="/calendar">season</a> as it unfolded.',
+
+  // --- NotFound body prose ---
+  notFoundBody:
+    'Perhaps the round has been rescheduled. <a class="prose-link" href="/calendar">Return to the card</a> and begin again — or head back to the <a class="prose-link" href="/">clubhouse</a>.',
+};
+
+// -------------------------------------------------------------
+// Course history timeline (1898 → 2024)
+// -------------------------------------------------------------
+export const courseTimeline = [
+  { year: 1898, title: 'Founded',       body: 'A nine-hole layout is traced through the sparse Mashonaland savanna.' },
+  { year: 1934, title: 'Eighteen Holes', body: 'The second nine completes the course — the routing near-identical to what is played today.' },
+  { year: 1960, title: 'Royal Charter',  body: 'Granted by Queen Elizabeth II — the prefix "Royal" is added to the name.' },
+  { year: 1979, title: 'Golf Digest',    body: "Named among the world's fifty finest courses outside the United States." },
+  { year: 2024, title: 'Season MMXXV',   body: 'The Bard Santner Loyalty Event enters its eleven-round form.' },
+];
+
+// -------------------------------------------------------------
+// 9 "nine-hole teaser" cards for the course page
+// -------------------------------------------------------------
+export const nineHoleTeaser = [
+  { roman: 'I',    n: 1,  par: 4, yards: 388, name: 'The Opening' },
+  { roman: 'II',   n: 2,  par: 3, yards: 164, name: 'Short Glass' },
+  { roman: 'III',  n: 3,  par: 4, yards: 352, name: 'The Dog-Leg' },
+  { roman: 'IV',   n: 4,  par: 5, yards: 498, name: 'Msasa Run' },
+  { roman: 'V',    n: 5,  par: 4, yards: 404, name: 'The Bend' },
+  { roman: 'VI',   n: 6,  par: 3, yards: 178, name: 'Dew Hollow' },
+  { roman: 'VII',  n: 7,  par: 4, yards: 372, name: 'Reading Green' },
+  { roman: 'VIII', n: 8,  par: 4, yards: 412, name: 'The Rise' },
+  { roman: 'IX',   n: 9,  par: 4, yards: 432, name: 'Home to the Turn' },
+];
+
+// -------------------------------------------------------------
+// Slot register per qualifying round (for palm-leaf bookmarks)
+// -------------------------------------------------------------
+export const calendarSlots = {
+  // roman → { state: 'past'|'next'|'upcoming', filled: n }
+  I:    { state: 'past',    filled: 36 },
+  II:   { state: 'past',    filled: 34 },
+  III:  { state: 'next',    filled: 22 },
+  IV:   { state: 'upcoming', filled: 14 },
+  V:    { state: 'upcoming', filled: 8 },
+  VI:   { state: 'upcoming', filled: 5 },
+  VII:  { state: 'upcoming', filled: 3 },
+  VIII: { state: 'upcoming', filled: 2 },
+  IX:   { state: 'upcoming', filled: 1 },
+};
+
+// -------------------------------------------------------------
 // Nav — editorial menu
 // -------------------------------------------------------------
 export const nav = {
