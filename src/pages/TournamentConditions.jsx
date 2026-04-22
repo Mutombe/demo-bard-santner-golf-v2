@@ -39,13 +39,13 @@ export default function TournamentConditions() {
               <a
                 href={conditions.pdfHref}
                 download
-                className="page-curl inline-flex items-center gap-2 px-5 py-3 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-brass-500 transition-colors"
+                className="press-physics page-curl inline-flex items-center gap-2 px-5 py-3 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-brass-500 transition-colors"
               >
                 <DownloadSimple size={14} weight="regular" /> {conditions.pdfLabel}
               </a>
               <button
                 onClick={() => window.print()}
-                className="inline-flex items-center gap-2 px-5 py-3 border border-royal-900 text-royal-900 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-royal-900 hover:text-ivory-50 transition-colors"
+                className="press-physics inline-flex items-center gap-2 px-5 py-3 border border-royal-900 text-royal-900 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-royal-900 hover:text-ivory-50 transition-colors"
               >
                 <Printer size={14} weight="regular" /> Print
               </button>
@@ -137,7 +137,7 @@ export default function TournamentConditions() {
           <a
             href={conditions.pdfHref}
             download
-            className="page-curl inline-flex items-center gap-3 px-7 py-3.5 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-brass-500 transition-colors"
+            className="press-physics page-curl inline-flex items-center gap-3 px-7 py-3.5 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-brass-500 transition-colors"
           >
             <DownloadSimple size={16} /> Download the PDF
           </a>

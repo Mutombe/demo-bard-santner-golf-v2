@@ -45,7 +45,7 @@ export default function NotFound() {
           />
           <Link
             to="/"
-            className="mt-10 inline-flex items-center gap-2 px-7 py-3.5 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-brass-500 transition"
+            className="press-physics mt-10 inline-flex items-center gap-2 px-7 py-3.5 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-brass-500 transition"
           >
             Return to home
           </Link>

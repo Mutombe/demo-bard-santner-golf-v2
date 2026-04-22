@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { List, X, MagnifyingGlass } from '@phosphor-icons/react';
 import { nav, partnership, brand } from '../data/siteData';
+import { haptic } from '../lib/haptics';
 
 export default function Navbar({ onOpenSearch }) {
   const [open, setOpen] = useState(false);
@@ -95,6 +96,7 @@ export default function Navbar({ onOpenSearch }) {
                 <NavLink
                   to={item.to}
                   end={item.to === '/'}
+                  onClick={() => haptic(6)}
                   className={({ isActive }) =>
                     [
                       'transition-colors duration-300 pb-1 border-b',
@@ -119,7 +121,7 @@ export default function Navbar({ onOpenSearch }) {
             </button>
             <Link
               to="/register"
-              className={['hidden sm:inline-flex items-center gap-2 px-5 py-2.5 font-sans text-[0.72rem] tracking-[0.22em] uppercase transition-colors duration-500', reserveBtn].join(' ')}
+              className={['press-physics hidden sm:inline-flex items-center gap-2 px-5 py-2.5 font-sans text-[0.72rem] tracking-[0.22em] uppercase transition-colors duration-500', reserveBtn].join(' ')}
             >
               Reserve <span aria-hidden>→</span>
             </Link>
@@ -197,7 +199,8 @@ export default function Navbar({ onOpenSearch }) {
 
               <Link
                 to="/register"
-                className="mt-8 inline-flex w-full items-center justify-center gap-3 px-6 py-4 bg-royal-900 text-ivory-50 font-sans text-sm tracking-[0.2em] uppercase hover:bg-brass-500 transition-colors"
+                onClick={() => haptic(8)}
+                className="press-physics mt-8 inline-flex w-full items-center justify-center gap-3 px-6 py-4 bg-royal-900 text-ivory-50 font-sans text-sm tracking-[0.2em] uppercase hover:bg-brass-500 transition-colors"
               >
                 Reserve a Tee Time →
               </Link>

@@ -14,6 +14,7 @@ import WaxSealButton from '../components/WaxSealButton';
 import {
   calendar, teeWindows, shirtSizes, genders, dietaryOptions, contact, proseHtml,
 } from '../data/siteData';
+import { haptic } from '../lib/haptics';
 
 const initialForm = {
   eventRoman: '',
@@ -67,10 +68,12 @@ export default function Register() {
       toast("Kindly complete the details before proceeding.");
       return;
     }
+    haptic(12);
     setStep((s) => Math.min(s + 1, steps.length - 1));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const back = () => {
+    haptic(8);
     setStep((s) => Math.max(s - 1, 0));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -191,13 +194,13 @@ export default function Register() {
                 <button
                   onClick={back}
                   disabled={step === 0}
-                  className="inline-flex items-center gap-2 px-5 py-3 font-sans text-[0.72rem] tracking-[0.22em] uppercase text-ink-500 hover:text-royal-900 transition disabled:opacity-30"
+                  className="press-physics inline-flex items-center gap-2 px-5 py-3 font-sans text-[0.72rem] tracking-[0.22em] uppercase text-ink-500 hover:text-royal-900 transition disabled:opacity-30"
                 >
                   <ArrowLeft size={14} /> Back
                 </button>
                 <button
                   onClick={next}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-brass-500 transition-colors"
+                  className="press-physics inline-flex items-center gap-2 px-8 py-4 bg-royal-900 text-ivory-50 font-sans text-[0.72rem] tracking-[0.22em] uppercase hover:bg-brass-500 transition-colors"
                 >
                   Continue <ArrowRight size={14} />
                 </button>

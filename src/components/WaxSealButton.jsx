@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
+import { haptic } from '../lib/haptics';
 
 // A classical brass wax-seal submit button.
 // Static: an intact seal with a "B" monogram.
 // Hover:  the seal cracks slightly.
 // Press:  the seal splits open with a brass spark.
+// Haptic: a firmer 20ms confirm on tap.
 export default function WaxSealButton({
   onClick,
   label = 'Dispatch',
@@ -12,17 +14,22 @@ export default function WaxSealButton({
   className = '',
   type = 'button',
 }) {
+  const onPress = (e) => {
+    if (disabled) return;
+    haptic(20);
+    if (onClick) onClick(e);
+  };
   return (
     <motion.button
       type={type}
-      onClick={onClick}
+      onClick={onPress}
       disabled={disabled}
       whileHover={disabled ? {} : { scale: 1.015 }}
-      whileTap={disabled ? {} : { scale: 0.96 }}
+      whileTap={disabled ? {} : { scale: 0.94, y: 1 }}
       className={[
-        'group relative inline-flex items-center gap-5 px-6 py-5 bg-ivory-50 border border-brass-500',
+        'press-seal group relative inline-flex items-center gap-5 px-6 py-5 bg-ivory-50 border border-brass-500',
         'text-royal-900 font-serif italic text-lg disabled:opacity-50 disabled:cursor-not-allowed',
-        'transition-shadow hover:shadow-[0_8px_30px_rgba(199,125,58,0.25)]',
+        'transition-shadow hover:shadow-[0_8px_30px_rgba(199,125,58,0.25)] active:shadow-[0_4px_14px_rgba(199,125,58,0.2)]',
         className,
       ].join(' ')}
       aria-label={label}

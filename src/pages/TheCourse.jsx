@@ -55,16 +55,17 @@ export default function TheCourse() {
         <SectionReveal>
           <figure className="plate">
             <img
-              src="/images/parkland-avenue.jpg"
-              alt="Msasa avenue on the course"
-              className="w-full h-[62vh] object-cover object-center"
+              src="/images/panoramic-course.jpg"
+              alt="The course at first light — sponsor flags along the fairway"
+              className="w-full h-[62vh] object-cover"
+              style={{ objectPosition: '55% 50%' }}
               loading="eager"
               fetchpriority="high"
               decoding="async"
             />
           </figure>
           <figcaption className="mt-3 px-2 font-serif italic text-ink-400 text-sm">
-            Msasa avenue on the 14th. The trees turn copper in August.
+            The course at first light. Sponsor flags along the 14th.
           </figcaption>
         </SectionReveal>
       </section>
@@ -156,7 +157,7 @@ export default function TheCourse() {
             />
             {courseTimeline.map((t, i) => (
               <SectionReveal key={t.year} delay={0.05 * i} as="li">
-                <div className="relative flex items-start gap-6 py-8 border-b border-ivory-300 last:border-b-0">
+                <div className="relative flex items-start gap-6 py-8 border-b border-ivory-300 last:border-b-0 timeline-row">
                   {/* Brass dot */}
                   <span
                     aria-hidden
@@ -328,7 +329,7 @@ export default function TheCourse() {
             </h2>
             <Link
               to="/register"
-              className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
+              className="press-physics mt-10 inline-flex items-center gap-3 px-8 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
             >
               Reserve a tee time <ArrowRight size={16} />
             </Link>

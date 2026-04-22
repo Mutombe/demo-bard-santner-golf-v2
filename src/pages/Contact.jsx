@@ -11,6 +11,7 @@ import RomanNumeralHeading from '../components/RomanNumeralHeading';
 import Prose from '../components/Prose';
 import WaxSealButton from '../components/WaxSealButton';
 import { contact, partnership, proseHtml } from '../data/siteData';
+import { haptic } from '../lib/haptics';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: 'General enquiry', message: '' });
@@ -165,11 +166,11 @@ export default function Contact() {
                     <button
                       type="button"
                       key={c.id}
-                      onClick={() => setChannel(c.id)}
+                      onClick={() => { haptic(6); setChannel(c.id); }}
                       className={[
-                        'relative text-left px-5 py-4 border-2 transition-all',
+                        'press-physics relative text-left px-5 py-4 border-2 transition-all',
                         active
-                          ? (c.id === 'whatsapp' ? 'border-[#25D366] bg-[#25D366]/5' : 'border-brass-500 bg-brass-500/5')
+                          ? (c.id === 'whatsapp' ? 'border-brass-500 bg-brass-500/5' : 'border-brass-500 bg-brass-500/5')
                           : 'border-ivory-300 hover:border-brass-500/60 hover:bg-ivory-50',
                       ].join(' ')}
                     >
@@ -179,7 +180,7 @@ export default function Contact() {
                           <svg viewBox="0 0 32 32" className="h-8 w-8 shrink-0" aria-hidden>
                             <path
                               d="M6 8 C 6 6, 8 4, 10 4 L 13 4 L 15 10 L 12 12 Q 14 18, 20 20 L 22 17 L 28 19 L 28 22 C 28 24, 26 26, 24 26 C 14 26, 6 18, 6 8 Z"
-                              fill={active ? '#25D366' : '#C77D3A'}
+                              fill={active ? '#A4652A' : '#C77D3A'}
                               stroke="#0B2540"
                               strokeWidth="0.5"
                             />

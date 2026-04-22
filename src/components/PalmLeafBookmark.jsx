@@ -1,14 +1,23 @@
 import { motion } from 'framer-motion';
 import CountUp from './CountUp';
+import { useTilt } from '../hooks/useTilt';
 
 // A vertical "bookmark" card for a tournament date, styled as a brass-edged
 // palm-leaf panel. Past rounds get a PLAYED stamp. Next round pulses.
+// The bookmark tilts toward the cursor — subtle lift, editorial.
 export default function PalmLeafBookmark({ event, state = 'upcoming', slotsFilled = 0, slotsTotal = 36 }) {
   // state: 'past' | 'next' | 'upcoming'
   const isPast = state === 'past';
   const isNext = state === 'next';
+  const t = useTilt(3);
 
   return (
+    <div
+      ref={t.ref}
+      onMouseMove={t.onMouseMove}
+      onMouseLeave={t.onMouseLeave}
+      style={{ ...t.style, transition: 'transform 180ms ease-out' }}
+    >
     <motion.article
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
@@ -94,5 +103,6 @@ export default function PalmLeafBookmark({ event, state = 'upcoming', slotsFille
         </motion.div>
       )}
     </motion.article>
+    </div>
   );
 }

@@ -10,6 +10,7 @@ import Prose from '../components/Prose';
 import IlluminatedCapitalCard from '../components/IlluminatedCapitalCard';
 import FramedPlate from '../components/FramedPlate';
 import { eventEssay, qualifying, faq, partnership, proseHtml } from '../data/siteData';
+import { haptic } from '../lib/haptics';
 
 export default function TheEvent() {
   return (
@@ -227,7 +228,7 @@ export default function TheEvent() {
           <div className="mt-14 divide-y divide-ivory-300 border-y border-ivory-300">
             {faq.items.map((f, i) => (
               <SectionReveal key={i} delay={0.04 * i}>
-                <details className="group py-7">
+                <details className="group py-7" onToggle={() => haptic(8)}>
                   <summary className="flex items-baseline gap-5 cursor-pointer list-none">
                     <span className="engraved-numeral text-xl shrink-0 w-8">{String(i + 1).padStart(2, '0')}</span>
                     <span className="flex-1 font-display text-xl lg:text-2xl text-royal-900 leading-snug">
@@ -255,7 +256,7 @@ export default function TheEvent() {
             </h2>
             <Link
               to="/register"
-              className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
+              className="press-physics mt-10 inline-flex items-center gap-3 px-8 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
             >
               Register <ArrowRight size={16} />
             </Link>

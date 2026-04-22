@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
+import { useTilt } from '../hooks/useTilt';
 
 // A card with a massive illuminated initial letter in brass, the rest of
 // the body text small and serif alongside. Used on Home and Event pages.
+// The card tilts toward the cursor by up to 3° — a tangible, editorial
+// lift that makes the initial letter feel illuminated from a real light.
 export default function IlluminatedCapitalCard({
   letter = 'I',
   eyebrow,
@@ -9,7 +12,14 @@ export default function IlluminatedCapitalCard({
   body,
   className = '',
 }) {
+  const t = useTilt(3);
   return (
+    <div
+      ref={t.ref}
+      onMouseMove={t.onMouseMove}
+      onMouseLeave={t.onMouseLeave}
+      style={{ ...t.style, transition: 'transform 180ms ease-out' }}
+    >
     <motion.article
       whileHover={{ y: -3 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
@@ -58,5 +68,6 @@ export default function IlluminatedCapitalCard({
         className="absolute left-6 right-6 bottom-3 h-px bg-brass-500/0 group-hover:bg-brass-500/60 transition-colors duration-500"
       />
     </motion.article>
+    </div>
   );
 }

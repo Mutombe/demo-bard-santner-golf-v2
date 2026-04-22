@@ -1,9 +1,20 @@
 import { motion } from 'framer-motion';
+import { useTilt } from '../hooks/useTilt';
 
 // A classical "framed painting" plate — brass border + animated corner
-// ornaments, subtle hover tilt.
+// ornaments, subtle hover tilt. An outer tilt wrapper lifts the plate
+// toward the cursor on pointer move (3° max), like a painting catching
+// the light. The inner motion.div keeps its own whileHover spring for
+// the corner-ornament rotation, unaffected by the tilt transform.
 export default function FramedPlate({ children, tilt = 0.6, className = '' }) {
+  const t = useTilt(3);
   return (
+    <div
+      ref={t.ref}
+      onMouseMove={t.onMouseMove}
+      onMouseLeave={t.onMouseLeave}
+      style={{ ...t.style, transition: 'transform 180ms ease-out' }}
+    >
     <motion.div
       whileHover={{ rotate: tilt, y: -3 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
@@ -43,5 +54,6 @@ export default function FramedPlate({ children, tilt = 0.6, className = '' }) {
 
       {children}
     </motion.div>
+    </div>
   );
 }

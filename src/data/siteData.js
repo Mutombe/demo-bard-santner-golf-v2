@@ -105,7 +105,7 @@ export const courseEssay = {
       name: "The Dog-Leg",
       notes:
         "A short par-four over a stand of mature Jacaranda. The second shot is everything; the tee shot is merely an apology to the green.",
-      image: "/images/parkland-avenue.jpg",
+      image: "/images/panoramic-parkland.jpg",
     },
     {
       roman: "IX",
@@ -121,7 +121,7 @@ export const courseEssay = {
       name: "Through the Avenue",
       notes:
         "Msasa on both sides of the fairway, the trees thick enough to give the impression of walking through a library.",
-      image: "/images/afternoon-light.jpg",
+      image: "/images/panoramic-course.jpg",
     },
     {
       roman: "XVIII",
@@ -129,7 +129,7 @@ export const courseEssay = {
       name: "Home",
       notes:
         "An unfussy par-four that asks only for a committed second shot and a measured putt. The walk up is the point.",
-      image: "/images/evening-green.jpg",
+      image: "/images/clubhouse-exterior.jpg",
     },
   ],
   amenities: [
@@ -210,13 +210,13 @@ export const qualifying = {
       eyebrow: "The Final Prizes",
       title: "The Nedbank Golf Challenge, Sun City",
       body: "Players over the age of 25 with seven or more rounds played will compete for the series' final prize: an all-expenses-paid trip to watch the Nedbank Golf Challenge at Gary Player Country Club, Sun City, South Africa.",
-      image: "/images/trophy-moment.jpg",
+      image: "/images/clubhouse-press.jpg",
     },
     {
       eyebrow: "The South African Open",
       title: "Additional Travel Invitations",
       body: "Strong performers in the series may receive invitations to the South African Open. Three qualifying rounds are the informal threshold. Eight rounds secures the Nedbank travel conversation.",
-      image: "/images/sponsor-gathering.jpg",
+      image: "/images/event-celebration.jpg",
     },
   ],
 };
@@ -377,6 +377,10 @@ export const media = {
   subtitle:
     "Photographs from the Bard Santner Loyalty Event and the fairways of Royal Harare Golf Club.",
   items: [
+    // ---- First 8 are reserved for the Home "Media Strip" preview and
+    //      are all clean, unwatermarked photographs. The full gallery
+    //      below continues with the watermarked tournament-photography
+    //      archive under MediaCenter's filtered view.
     {
       id: "m01",
       src: "/images/9th-fairway.jpg",
@@ -387,11 +391,11 @@ export const media = {
     },
     {
       id: "m02",
-      src: "/images/brand-flags-fairway.jpg",
-      caption: "Sponsor flags at the opening round, against a high Highveld sky.",
-      date: "February 2025",
-      credit: "Bard Santner Events",
-      tag: "Event",
+      src: "/images/panoramic-course.jpg",
+      caption: "Panoramic of the course, looking east at first light.",
+      date: "November 2024",
+      credit: "Royal Harare Archive",
+      tag: "Course",
     },
     {
       id: "m03",
@@ -411,14 +415,55 @@ export const media = {
     },
     {
       id: "m05",
+      src: "/images/event-celebration.jpg",
+      caption: "Sunset flag on the 12th green. The end of a warm Saturday.",
+      date: "October 2025",
+      credit: "Royal Harare Archive",
+      tag: "Event",
+    },
+    {
+      id: "m06",
       src: "/images/drive-follow-through.jpg",
-      caption: "Follow-through, from the tee. The Bard Santner flag off-frame.",
+      caption: "Follow-through, from the tee. A committed swing, quiet gallery.",
       date: "May 2025",
       credit: "Tournament Photography",
       tag: "Players",
     },
     {
-      id: "m06",
+      id: "m07",
+      src: "/images/panoramic-parkland.jpg",
+      caption: "A member between rounds — the parkland holding its quiet.",
+      date: "August 2025",
+      credit: "Royal Harare Archive",
+      tag: "Players",
+    },
+    {
+      id: "m08",
+      src: "/images/caddie-line-read.jpg",
+      caption: "A caddie and his player, reading a line on the 11th.",
+      date: "June 2025",
+      credit: "Tournament Photography",
+      tag: "Players",
+    },
+    // ---- Full gallery continues (watermarked tournament archive) ----
+    {
+      id: "m09",
+      src: "/images/clubhouse-press.jpg",
+      caption: "Prize-giving at the clubhouse. The sponsor wall, the handshake.",
+      date: "November 2024",
+      credit: "Bard Santner Events",
+      tag: "Clubhouse",
+    },
+    {
+      id: "m10",
+      src: "/images/brand-flags-fairway.jpg",
+      caption: "Sponsor flags at the opening round, against a high Highveld sky.",
+      date: "February 2025",
+      credit: "Bard Santner Events",
+      tag: "Event",
+    },
+    {
+      id: "m11",
       src: "/images/event-signage.jpg",
       caption: "Sponsor signage at the 1st tee. Morning shadow, long grass.",
       date: "February 2025",
@@ -426,7 +471,7 @@ export const media = {
       tag: "Event",
     },
     {
-      id: "m07",
+      id: "m12",
       src: "/images/registration-tent.jpg",
       caption: "The registration marquee, before the field arrives.",
       date: "March 2025",
@@ -434,7 +479,7 @@ export const media = {
       tag: "Event",
     },
     {
-      id: "m08",
+      id: "m13",
       src: "/images/morning-dew.jpg",
       caption: "Dew on the 6th, an hour before the first groups.",
       date: "July 2025",
@@ -442,7 +487,7 @@ export const media = {
       tag: "Course",
     },
     {
-      id: "m09",
+      id: "m14",
       src: "/images/parkland-avenue.jpg",
       caption: "Msasa avenue on the 14th — the club's most photographed walk.",
       date: "August 2025",
@@ -450,7 +495,7 @@ export const media = {
       tag: "Course",
     },
     {
-      id: "m10",
+      id: "m15",
       src: "/images/mid-swing.jpg",
       caption: "Mid-swing on the 2nd tee. A committed turn, quiet gallery.",
       date: "May 2025",
@@ -458,7 +503,7 @@ export const media = {
       tag: "Players",
     },
     {
-      id: "m11",
+      id: "m16",
       src: "/images/address-position.jpg",
       caption: "Addressing the ball on the 1st. Land Rover sponsor plaque in frame.",
       date: "March 2025",
@@ -466,15 +511,7 @@ export const media = {
       tag: "Players",
     },
     {
-      id: "m12",
-      src: "/images/caddie-line-read.jpg",
-      caption: "A caddie and his player, reading a line on the 11th.",
-      date: "June 2025",
-      credit: "Tournament Photography",
-      tag: "Players",
-    },
-    {
-      id: "m13",
+      id: "m17",
       src: "/images/fairway-walk.jpg",
       caption: "Walking up the 15th fairway to the approach.",
       date: "July 2025",
@@ -482,7 +519,7 @@ export const media = {
       tag: "Course",
     },
     {
-      id: "m14",
+      id: "m18",
       src: "/images/approach-shot.jpg",
       caption: "An approach shot played from the short grass. September light.",
       date: "September 2025",
@@ -490,7 +527,7 @@ export const media = {
       tag: "Players",
     },
     {
-      id: "m15",
+      id: "m19",
       src: "/images/afternoon-light.jpg",
       caption: "Mid-afternoon light under the Msasa, late in the front nine.",
       date: "August 2025",
@@ -498,7 +535,7 @@ export const media = {
       tag: "Course",
     },
     {
-      id: "m16",
+      id: "m20",
       src: "/images/course-vista.jpg",
       caption: "Vista across the lakes, the 10th tee in the foreground.",
       date: "June 2025",
@@ -506,7 +543,7 @@ export const media = {
       tag: "Course",
     },
     {
-      id: "m17",
+      id: "m21",
       src: "/images/evening-green.jpg",
       caption: "The 18th green at close of play. The flag in, the players gone.",
       date: "May 2025",
@@ -514,7 +551,7 @@ export const media = {
       tag: "Course",
     },
     {
-      id: "m18",
+      id: "m22",
       src: "/images/trophy-moment.jpg",
       caption: "Winner's presentation. Prize-giving, clubhouse veranda.",
       date: "November 2024",
@@ -522,7 +559,7 @@ export const media = {
       tag: "Event",
     },
     {
-      id: "m19",
+      id: "m23",
       src: "/images/prize-presentation.jpg",
       caption: "Sponsor remarks at the close of Round IX.",
       date: "January 2025",
@@ -530,20 +567,12 @@ export const media = {
       tag: "Event",
     },
     {
-      id: "m20",
+      id: "m24",
       src: "/images/group-photo.jpg",
       caption: "The leaders' group, after handing in cards.",
       date: "November 2024",
       credit: "Bard Santner Events",
       tag: "Event",
-    },
-    {
-      id: "m21",
-      src: "/images/panoramic-course.jpg",
-      caption: "Panoramic of the course, looking east at first light.",
-      date: "November 2024",
-      credit: "Royal Harare Archive",
-      tag: "Course",
     },
   ],
   filterTags: ["All", "Course", "Players", "Event", "Clubhouse"],

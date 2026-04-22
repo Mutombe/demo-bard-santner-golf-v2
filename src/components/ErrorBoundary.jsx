@@ -28,13 +28,13 @@ export default class ErrorBoundary extends React.Component {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
               onClick={() => window.location.reload()}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-royal-900 text-ivory-50 font-sans text-sm tracking-wider uppercase hover:bg-royal-800 transition"
+              className="press-physics inline-flex items-center gap-2 px-6 py-3 bg-royal-900 text-ivory-50 font-sans text-sm tracking-wider uppercase hover:bg-royal-800 transition"
             >
               <ArrowCounterClockwise size={16} weight="regular" /> Refresh
             </button>
             <a
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-ink-600 text-ink-700 font-sans text-sm tracking-wider uppercase hover:bg-ink-700 hover:text-ivory-50 transition"
+              className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-ink-600 text-ink-700 font-sans text-sm tracking-wider uppercase hover:bg-ink-700 hover:text-ivory-50 transition"
             >
               <House size={16} weight="regular" /> Return home
             </a>

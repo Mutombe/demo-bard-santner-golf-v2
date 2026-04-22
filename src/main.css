@@ -61,6 +61,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   background: var(--color-paper-50);
 }
 
@@ -512,6 +513,71 @@ body {
   pointer-events: none;
 }
 
+/* -------------------------------------------------------------------
+   Press physics — tangible button feedback. Applied to interactive
+   elements so every click has a felt depth. Tiny scale + y-nudge on
+   :active; transforms only (cheap on the compositor).
+   ------------------------------------------------------------------- */
+.press-physics {
+  transition-property: transform, box-shadow, background-color, color, border-color, filter;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.press-physics:active {
+  transform: scale(0.97) translateY(1px);
+}
+/* A refined press for the wax seal — the seal tightens on click rather
+   than flattens, as though pressed into the paper. */
+.press-seal:active {
+  transform: scale(0.94) translateY(1px);
+  filter: brightness(0.95);
+}
+
+/* -------------------------------------------------------------------
+   Floating brass FAB — breathing glow ring behind the button
+   ------------------------------------------------------------------- */
+.fab-brass {
+  /* Soft, low-spread ambient brass — feels like a wax-seal glow */
+  box-shadow:
+    0 1px 0 rgba(199, 125, 58, 0.55),
+    0 10px 28px rgba(62, 38, 16, 0.28),
+    inset 0 0 0 1px rgba(255, 236, 201, 0.22);
+  position: fixed;
+}
+.fab-brass-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  pointer-events: none;
+  border: 1px solid rgba(199, 125, 58, 0.55);
+  opacity: 0;
+  animation: fab-pulse 2.8s ease-out infinite;
+}
+@keyframes fab-pulse {
+  0%   { transform: scale(0.9); opacity: 0.55; }
+  70%  { transform: scale(1.22); opacity: 0; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+
+/* -------------------------------------------------------------------
+   Brass hairline — IntersectionObserver-driven draw
+   ------------------------------------------------------------------- */
+.brass-hairline-draw {
+  transform-origin: left center;
+}
+
+/* -------------------------------------------------------------------
+   One-section-per-viewport rhythm — applied to major editorial sections.
+   min-h uses `100svh` (small viewport height) to respect mobile chrome.
+   ------------------------------------------------------------------- */
+.section-breath {
+  min-height: calc(100svh - 5rem);
+}
+/* Narrower sections (stats, quote-only) stay tighter */
+.section-breath-narrow {
+  min-height: calc(70svh - 5rem);
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .brass-rule-breathe,
@@ -519,8 +585,11 @@ body {
   .italic-tremble-in,
   .drop-cap-glow::first-letter,
   .numeral-card[data-active="true"],
-  .engraved-plate .glint {
+  .engraved-plate .glint,
+  .fab-brass-pulse {
     animation: none !important;
     transition: none !important;
   }
+  .press-physics:active { transform: none !important; }
+  .press-seal:active { transform: none !important; filter: none !important; }
 }

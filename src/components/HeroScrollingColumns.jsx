@@ -8,31 +8,33 @@ import { hero, partnership } from '../data/siteData';
 // read behind a royal-navy glass. The hero section extends behind the
 // transparent navbar on the Home page (nav solidifies on scroll).
 
+// All entries below are clean, unwatermarked photographs. The watermarked
+// tournament-photography archive is reserved for the MediaCenter gallery.
 const COLUMN_1 = [
   '/images/9th-fairway.jpg',
-  '/images/parkland-avenue.jpg',
-  '/images/morning-dew.jpg',
-  '/images/afternoon-light.jpg',
-  '/images/course-vista.jpg',
   '/images/panoramic-parkland.jpg',
+  '/images/clubhouse-exterior.jpg',
+  '/images/panoramic-course.jpg',
+  '/images/caddie-line-read.jpg',
+  '/images/event-celebration.jpg',
 ];
 
 const COLUMN_2 = [
-  '/images/evening-green.jpg',
-  '/images/fairway-walk.jpg',
-  '/images/the-links-tee.jpg',
-  '/images/clubhouse-exterior.jpg',
-  '/images/approach-shot.jpg',
+  '/images/clubhouse-press.jpg',
+  '/images/drive-follow-through.jpg',
   '/images/panoramic-course.jpg',
+  '/images/green-putt.jpg',
+  '/images/9th-fairway.jpg',
+  '/images/panoramic-parkland.jpg',
 ];
 
 const COLUMN_3 = [
-  '/images/mid-swing.jpg',
   '/images/drive-follow-through.jpg',
-  '/images/green-putt.jpg',
   '/images/caddie-line-read.jpg',
-  '/images/putting-line.jpg',
-  '/images/tee-scene.jpg',
+  '/images/event-celebration.jpg',
+  '/images/clubhouse-exterior.jpg',
+  '/images/green-putt.jpg',
+  '/images/clubhouse-press.jpg',
 ];
 
 function ScrollingColumn({ images, direction = 'up', duration = 36, paused = false }) {
@@ -224,14 +226,14 @@ export default function HeroScrollingColumns() {
           >
             <Link
               to={hero.primaryCta.to}
-              className="group inline-flex items-center gap-3 px-7 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
+              className="press-physics group inline-flex items-center gap-3 px-7 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
             >
               Reserve your slot
               <ArrowRight size={16} weight="regular" className="transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               to={hero.secondaryCta.to}
-              className="group inline-flex items-center gap-3 px-7 py-4 border border-ivory-100/70 text-ivory-50 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-100 hover:text-royal-950 transition-colors"
+              className="press-physics group inline-flex items-center gap-3 px-7 py-4 border border-ivory-100/70 text-ivory-50 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-100 hover:text-royal-950 transition-colors"
             >
               Read the story
             </Link>

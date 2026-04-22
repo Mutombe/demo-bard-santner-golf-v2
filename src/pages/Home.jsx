@@ -12,6 +12,8 @@ import CountUp from '../components/CountUp';
 import Prose from '../components/Prose';
 import IlluminatedCapitalCard from '../components/IlluminatedCapitalCard';
 import FramedPlate from '../components/FramedPlate';
+import SectionLetterbox from '../components/SectionLetterbox';
+import BrassHairline from '../components/BrassHairline';
 
 import {
   masthead, eventEssay, calendar, courseEssay,
@@ -96,10 +98,11 @@ export default function Home() {
               <SectionReveal delay={0.25}>
                 <div className="plate sepia-hover aspect-[4/5]">
                   <img
-                    src="/images/brand-flags-fairway.jpg"
-                    alt="Bard Santner sponsor flags on the Royal Harare fairway"
+                    src="/images/panoramic-course.jpg"
+                    alt="Sponsor flags along the Royal Harare fairway at first light"
                     loading="lazy"
                     decoding="async"
+                    style={{ objectPosition: '60% 50%' }}
                     onError={(e) => (e.currentTarget.style.opacity = '0.2')}
                   />
                 </div>
@@ -114,14 +117,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- Film-cue brass hairline between essay and countdown ---------- */}
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 py-2">
+        <BrassHairline width="72%" />
+      </div>
+
       {/* ---------- COUNTDOWN ---------- */}
-      <section className="py-20 bg-ivory-100 border-y border-ivory-300 relative paper-grain">
-        <div className="max-w-4xl mx-auto px-6 relative">
-          <SectionReveal>
-            <Countdown />
-          </SectionReveal>
-        </div>
-      </section>
+      <SectionLetterbox>
+        <section className="py-20 bg-ivory-100 border-y border-ivory-300 relative paper-grain">
+          <div className="max-w-4xl mx-auto px-6 relative">
+            <SectionReveal>
+              <Countdown />
+            </SectionReveal>
+          </div>
+        </section>
+      </SectionLetterbox>
 
       {/* ---------- THE COURSE TEASER ---------- */}
       <section className="py-24 lg:py-32 bg-paper-50">
@@ -199,6 +209,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- Hairline between course teaser and calendar ---------- */}
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 py-2">
+        <BrassHairline width="56%" />
+      </div>
+
       {/* ---------- CALENDAR (preview) ---------- */}
       <section className="py-24 lg:py-28 bg-ivory-50 relative paper-grain">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
@@ -228,7 +243,7 @@ export default function Home() {
             />
             <Link
               to="/calendar"
-              className="inline-flex items-center gap-3 px-7 py-3.5 border border-royal-900 text-royal-900 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-royal-900 hover:text-ivory-50 transition-colors"
+              className="press-physics inline-flex items-center gap-3 px-7 py-3.5 border border-royal-900 text-royal-900 font-sans text-[0.72rem] tracking-[0.25em] uppercase hover:bg-royal-900 hover:text-ivory-50 transition-colors"
             >
               The full calendar <ArrowRight size={14} />
             </Link>
@@ -334,7 +349,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- Hairline between qualifying and media strip ---------- */}
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 py-2 bg-paper-50">
+        <BrassHairline width="48%" />
+      </div>
+
       {/* ---------- MEDIA STRIP ---------- */}
+      <SectionLetterbox>
       <section className="py-24 lg:py-28 bg-ivory-100 border-t border-ivory-300 relative paper-grain">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <SectionReveal>
@@ -370,6 +391,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </SectionLetterbox>
 
       {/* ---------- CLOSING CTA ---------- */}
       <section className="py-24 lg:py-32 bg-royal-950 text-ivory-100 relative overflow-hidden">
@@ -398,13 +420,13 @@ export default function Home() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/register"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
+                className="press-physics inline-flex items-center gap-3 px-8 py-4 bg-brass-500 text-royal-950 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-50 transition-colors"
               >
                 Reserve a tee time <ArrowRight size={16} />
               </Link>
               <Link
                 to="/tournament-conditions"
-                className="inline-flex items-center gap-3 px-8 py-4 border border-ivory-200/50 text-ivory-100 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-100/10 transition-colors"
+                className="press-physics inline-flex items-center gap-3 px-8 py-4 border border-ivory-200/50 text-ivory-100 font-sans text-[0.78rem] tracking-[0.25em] uppercase hover:bg-ivory-100/10 transition-colors"
               >
                 The full conditions
               </Link>
