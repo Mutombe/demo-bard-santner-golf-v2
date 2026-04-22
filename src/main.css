@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Royal navy (extracted from both partner marks) ---- */
+  --color-royal-50:  #EEF1F7;
+  --color-royal-100: #D8DEEB;
+  --color-royal-200: #ADB7CE;
+  --color-royal-300: #8190B0;
+  --color-royal-400: #546A93;
+  --color-royal-500: #2F4878;
+  --color-royal-600: #1E355F;
+  --color-royal-700: #142A4E;
+  --color-royal-800: #0E2240;
+  --color-royal-900: #0B2540;
+  --color-royal-950: #061832;
+
+  /* ---- Bard Santner warm orange, held with restraint ---- */
+  --color-brass-50:  #FBF2EA;
+  --color-brass-100: #F5DDC6;
+  --color-brass-200: #EBBE95;
+  --color-brass-300: #DFA06A;
+  --color-brass-400: #D3874A;
+  --color-brass-500: #C77D3A;
+  --color-brass-600: #A4652A;
+  --color-brass-700: #7E4E1F;
+  --color-brass-800: #5E3916;
+  --color-brass-900: #3E2610;
+
+  /* ---- Editorial canvas ---- */
+  --color-ivory-50:  #FBF8F2;
+  --color-ivory-100: #F7F2E7;
+  --color-ivory-200: #EFE7D3;
+  --color-ivory-300: #E3D6B7;
+  --color-ivory-400: #CDBC97;
+
+  --color-paper-50:  #FDFCF8;
+  --color-paper-100: #FAF8F1;
+
+  /* ---- Editorial charcoal for long-form type ---- */
+  --color-ink-50:  #F5F4F1;
+  --color-ink-100: #E6E4DE;
+  --color-ink-200: #BDBAB1;
+  --color-ink-300: #8A8780;
+  --color-ink-400: #5D5A54;
+  --color-ink-500: #3E3C37;
+  --color-ink-600: #2A2925;
+  --color-ink-700: #1D1C19;
+  --color-ink-800: #141310;
+  --color-ink-900: #0A0906;
+
+  /* ---- Typography ---- */
+  --font-display: 'Playfair Display', 'Times New Roman', Georgia, serif;
+  --font-serif:   'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-paper-50);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-ink-700);
+  background: var(--color-paper-50);
+  overflow-x: hidden;
+  font-feature-settings: "liga", "kern", "onum";
+}
+
+::selection {
+  background: var(--color-royal-900);
+  color: var(--color-ivory-50);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-paper-100); }
+::-webkit-scrollbar-thumb { background: var(--color-ivory-300); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brass-400); }
+
+.font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+.font-serif   { font-family: var(--font-serif); }
+.font-sans    { font-family: var(--font-sans); }
+
+.text-balance { text-wrap: balance; }
+.text-pretty  { text-wrap: pretty; }
+
+/* ---------- Editorial typographic utilities ---------- */
+
+/* Drop cap — first character of a leading paragraph */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  float: left;
+  font-size: 4.4em;
+  line-height: 0.9;
+  padding: 0.08em 0.12em 0 0;
+  color: var(--color-royal-900);
+  font-weight: 600;
+}
+
+/* Hairline brass rule — single-pixel divider in brass */
+.brass-rule {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    var(--color-brass-500) 18%,
+    var(--color-brass-500) 82%,
+    transparent 100%);
+  border: 0;
+}
+.brass-rule-solid {
+  height: 1px;
+  background: var(--color-brass-500);
+  border: 0;
+}
+
+/* Three-dot asterism separator */
+.asterism {
+  display: block;
+  text-align: center;
+  font-family: var(--font-display);
+  color: var(--color-brass-500);
+  letter-spacing: 0.5em;
+  font-size: 1.125rem;
+  margin: 2.5rem 0;
+}
+.asterism::before { content: '⁂'; }
+
+/* Engraved numeral — used for year, hole numbers, score */
+.engraved-numeral {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-feature-settings: "lnum", "pnum";
+  color: var(--color-brass-600);
+  letter-spacing: -0.02em;
+}
+
+/* Small-caps editorial label */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-brass-600);
+}
+.eyebrow-ink {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-ink-400);
+}
+
+/* Italic pull quote accent */
+.pull-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  line-height: 1.35;
+  color: var(--color-royal-900);
+}
+
+/* Classical framed photograph — brass hairline with ivory matte */
+.plate {
+  background: var(--color-ivory-50);
+  padding: 0.5rem;
+  border: 1px solid var(--color-brass-500);
+  box-shadow: 0 1px 0 var(--color-ivory-300);
+  transition: transform .7s ease, box-shadow .7s ease;
+}
+.plate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(11, 37, 64, 0.14);
+}
+.plate img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+/* Sepia warm-shift on hover for photography */
+.sepia-hover img {
+  transition: filter 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  filter: saturate(0.96) contrast(1.02);
+}
+.sepia-hover:hover img {
+  filter: sepia(0.12) saturate(1.04) contrast(1.04) hue-rotate(-6deg);
+  transform: scale(1.015);
+}
+
+/* Column grid helper */
+.editorial-columns {
+  column-count: 1;
+  column-gap: 2.25rem;
+}
+@media (min-width: 768px) {
+  .editorial-columns-md-2 { column-count: 2; }
+}
+
+/* Paper texture — subtle warm grain on ivory surfaces */
+.paper-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+}
+
+/* Ornate underline link */
+.classic-link {
+  color: var(--color-royal-900);
+  text-decoration: none;
+  background-image: linear-gradient(to right, var(--color-brass-500), var(--color-brass-500));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: color .3s, background-size .3s;
+}
+.classic-link:hover {
+  color: var(--color-brass-600);
+}
+
+/* Framed numeral card */
+.numeral-card {
+  position: relative;
+  padding: 1.5rem 1.25rem;
+  background: var(--color-paper-50);
+  border: 1px solid var(--color-ivory-300);
+  transition: border-color .45s ease, background .45s ease;
+}
+.numeral-card[data-active="true"] {
+  border-color: var(--color-brass-500);
+  background: linear-gradient(to bottom, var(--color-ivory-50), var(--color-paper-50));
+  box-shadow: inset 0 0 0 1px var(--color-brass-500);
+}
+
+/* Print stylesheet — used on T&Cs page */
+@media print {
+  nav, footer, .no-print { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .print-clean { padding: 0 !important; margin: 0 !important; }
+}
+
+/* Focus ring — quiet brass */
+:focus-visible {
+  outline: 1.5px solid var(--color-brass-500);
+  outline-offset: 3px;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .fade-mask-b { -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
+}
+
+/* Gentle fade-in for editorial reveal */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim-fade-up { animation: fade-up 900ms cubic-bezier(0.22, 1, 0.36, 1) both; }
